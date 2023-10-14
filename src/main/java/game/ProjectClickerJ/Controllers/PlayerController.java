@@ -2,8 +2,10 @@ package game.ProjectClickerJ.Controllers;
 
 import game.ProjectClickerJ.Models.Champion;
 import game.ProjectClickerJ.Models.Player;
+import game.ProjectClickerJ.Models.Weapon;
 import game.ProjectClickerJ.ObjectRepositories.ChampionRepository;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
+import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class PlayerController {
     @Autowired
     ChampionRepository championRepo;
 
+    @Autowired
+    WeaponRepository weaponRepo;
+
     @GetMapping("/ioupiPlayer")
     public String ioupi() {
         Player player = new Player();
@@ -33,26 +38,33 @@ public class PlayerController {
     }
 
 
-    @PostMapping("/shopChampion")
-    @Transactional
-    public String buyChampion(HttpSession session, Long championId) {
-        // Long playerId = (Long) session.getAttribute("playerId");
-        Optional<Player> player = playerRepo.findById(1L /*playerId*/);
-        Optional<Champion> champion = championRepo.findById(championId);
 
-        if (player.isEmpty() || champion.isEmpty()) {
-            System.out.println("player not found");
-            throw new RuntimeException("player not found");
+
+    @PostMapping("/shopWeapon")
+    @Transactional
+    public String buyWeapon(HttpSession session, Long weaponId) {
+        // Long playerId = (Long) session.getAttribute("playerId");
+        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
+
+        Optional<Weapon> weapon = weaponRepo.findById(weaponId);
+        if (player.isEmpty() || weapon.isEmpty()) {
+            System.out.println("player or champion not found");
+            throw new RuntimeException("player or champion not found");
         } else {
             Player playerInstance = player.get();
-            Champion championInstance = champion.get();
+            Weapon weaponInstance = weapon.get();
 
-            playerInstance.getInventoryChampion().add(championInstance);
+            playerInstance.getInventoryWeapon().add(weaponInstance);
             playerRepo.save(playerInstance);
         }
 
-        return "shopChampion";
+        return "redirect:/shopChampion";
     }
+
+
+
+
+
 
 }
 

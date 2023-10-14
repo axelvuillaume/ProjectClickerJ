@@ -7,10 +7,6 @@ import lombok.Getter;
 @Entity
 public class Team {
 
-    @Getter
-    @ManyToOne
-    private Player player;
-
     @OneToOne
     private Weapon weapon;
 
@@ -41,7 +37,4 @@ public class Team {
         this.id = id;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 }

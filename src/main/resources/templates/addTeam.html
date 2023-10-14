@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form action="addTeam" method="POST">
+
+    <label for="name">Name :</label>
+    <input id="name" name="name">
+
+    <select id="championSelected" name="championId">
+        <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
+            <span th:text="${champ.name}"></span>
+        </option>
+    </select>
+
+
+
+    <select id="weaponSelected" name="weaponId">
+        <option th:each="Weap : ${weaponsOwned}" th:value="${Weap.id}">
+            <span th:text="${Weap.name}"></span>
+        </option>
+    </select>
+
+    <button type="submit">addTeam</button>
+</form>
+
+
+</body>
+</html>

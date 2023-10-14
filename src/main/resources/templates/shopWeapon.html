@@ -5,11 +5,26 @@
     <title>Title</title>
 </head>
 <body>
-<select id="weapon" name="weaponId">
-    <option th:each="wea : ${weapons}" th:value="${wea.id}">
-        <span th:text="${wea.name}"></span>
-    </option>
-</select>
+
+<form action="equipWeapon" method="POST">
+    <select id="weaponOwned" name="weaponId">
+        <option th:each="weap : ${weaponsOwned}" th:value="${weap.id}">
+            <span th:text="${weap.name}"></span>
+        </option>
+    </select>
+
+    <button type="submit">Equipe Weapon</button>
+</form>
+
+<form action="shopWeapon" method="POST">
+    <select id="weaponNotOwned" name="weaponId">
+        <option th:each="noWeap : ${weaponsNotOwned}" th:value="${noWeap.id}">
+            <span th:text="${noWeap.name}"></span>
+        </option>
+    </select>
+
+    <button type="submit">Buy Weapon</button>
+</form>
 
 </body>
 </html>

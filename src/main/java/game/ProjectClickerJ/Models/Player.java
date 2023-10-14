@@ -22,7 +22,7 @@ public class Player {
     @OneToMany
     private List<Champion> InventoryChampion;
     @OneToMany
-    private List<Team> Teams;
+    private List<Team> InventoryTeams;
     @ManyToOne
     private Team selectedTeam;
 
@@ -53,12 +53,12 @@ public class Player {
         InventoryChampion = inventoryChampion;
     }
 
-    public void setTeams(List<Team> teams) {
-        Teams = teams;
-    }
-
     public void setSelectedTeam(Team selectedTeam) {
         this.selectedTeam = selectedTeam;
+    }
+
+    public void setInventoryTeams(List<Team> inventoryTeams) {
+        InventoryTeams = inventoryTeams;
     }
 
     public void setProfileImage(String profileImage) {
