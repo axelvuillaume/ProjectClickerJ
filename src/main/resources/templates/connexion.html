@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="connexion.css">
+    <link rel="stylesheet" th:href="@{/connexion.css}">
 </head>
 <body>
 <video autoplay loop muted playsinline poster="">
-    <source src="../static/ps3-wave.1920x1080.mp4" type="video/mp4">
+    <source th:src="@{/ps3-wave.1920x1080.mp4}" type="video/mp4">
 </video>
 
-
-<input type="text" name="" placeholder="Pseudo" class="pseudo">
+<form id="loginForm" action="login" method="POST">
+    <input type="text" name="pseudo" id="pseudoLabel" placeholder="Pseudo" class="pseudo">
+</form>
 
 <br>
 <br>
@@ -22,20 +23,33 @@
 
 <script>
     var progressBar = document.getElementById("progressBar");
+    var pseudoInput = document.getElementById("pseudoLabel");
 
     var totalSeconds = 5;
+    var timerId;
 
     function updateProgressBar(timer) {
         progressBar.value = (timer / totalSeconds) * 100;
 
         if (timer < totalSeconds) {
-            setTimeout(function () {
+            timerId = setTimeout(function () {
                 updateProgressBar(timer + 0.1);
             }, 100);
-        }else{
-            window.location.href = "index.html";
+        } else {
+            document.getElementById("loginForm").submit();
         }
     }
+
+    function resetProgressBar() {
+        console.log("okok")
+        clearTimeout(timerId); // Stops the timer
+        progressBar.value = 0; // Resets the progress bar to 0
+        updateProgressBar(0);  // Start the timer again
+    }
+
+    pseudoInput.addEventListener("input", function() {
+        resetProgressBar();
+    });
 
     updateProgressBar(0);
 </script>
