@@ -6,41 +6,32 @@ body {
 }
 
 video {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+        object-fit: cover;
     z-index: -1;
-}
-
-
-.menu .rounded-image {
-    border-radius: 50%;
-    border: 2px solid gold;
-    padding: 5px;
 }
 
 
 .menu {
     display: flex;
-    width: 20%;
-    height: 100vh;
+    width: 8%;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #f2f2f2;
+    background-color: #0C1329;
     border-right: 2px;
-    background-color: rgba(128, 128, 128, 0.5);
     flex-direction: column;
     text-align: center;
+    border-right: 2px solid #C5A76C;
 }
 
 
 .menu img{
-    max-width: 6vw;
-    max-height: 6vw;
+    max-width: 50%;
+    max-height: 50%;
+    margin: 15%;
 }
 
 
@@ -59,7 +50,7 @@ video {
     width: 100px;
     height: 100px;
     transform: rotate(45deg);
-    border : 2px solid white;
+    border : 2px solid gold;
     overflow: hidden;
 }
 
