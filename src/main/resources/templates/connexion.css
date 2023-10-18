@@ -1,0 +1,32 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height : 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    top: 50%
+}
+
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.pseudo{
+    background : transparent;
+    border: none;
+    border-bottom: solid white;
+
+}

@@ -1,4 +1,10 @@
 package game.ProjectClickerJ.ObjectRepositories;
 
-public interface ChampionRepository {
+import game.ProjectClickerJ.Models.Champion;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public interface ChampionRepository extends JpaRepository<Champion, Long> {
 }
