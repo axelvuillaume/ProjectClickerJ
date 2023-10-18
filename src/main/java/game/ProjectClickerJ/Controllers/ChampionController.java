@@ -32,28 +32,13 @@ public class ChampionController {
     @Autowired
     WeaponRepository weaponRepo;
 
-
-    // Juste pour creer un nouveau champion faut enlever apres je pense
-    @GetMapping("/ioupiChampion")
-    public String ioupi() {
-        Champion champion = new Champion();
-        champion.setName("Ioupi5");
-        champion.setBonus(10);
-        champion.setPrix(100);
-        champion.setXpUnlockable(100);
-        champion.setDescription("Ioupi est un champion de l'équipe de l'équipe");
-        champion.setImage("ioupi.png");
-        championRepo.save(champion);
-
-        return "index";
-    }
-
-
     @GetMapping("/shopChampion")
-    public String listChamps(Model model) {
+    public String listChamps(Model model, HttpSession session) {
         List<Champion> championsNotOwned = championRepo.findAll();
 
-        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
         if (player.isEmpty()) {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
@@ -71,11 +56,13 @@ public class ChampionController {
     }
 
 
-    @PostMapping("/shopChampion")
+    @PostMapping("/buyChampion")
     @Transactional
     public String buyChampion(HttpSession session, Long championId) {
-        // Long playerId = (Long) session.getAttribute("playerId");
-        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
         Optional<Champion> champion = championRepo.findById(championId);
 
         if (player.isEmpty() || champion.isEmpty()) {
@@ -91,10 +78,5 @@ public class ChampionController {
 
         return "shopChampion";
     }
-
-
-
-
-
 }
 
