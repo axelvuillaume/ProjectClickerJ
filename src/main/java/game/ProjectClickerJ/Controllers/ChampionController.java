@@ -59,10 +59,8 @@ public class ChampionController {
     @PostMapping("/buyChampion")
     @Transactional
     public String buyChampion(HttpSession session, Long championId) {
-
-        Long currentPlayerId = (Long) session.getAttribute("player");
-
-        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        // Long playerId = (Long) session.getAttribute("playerId");
+        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
         Optional<Champion> champion = championRepo.findById(championId);
 
         if (player.isEmpty() || champion.isEmpty()) {
