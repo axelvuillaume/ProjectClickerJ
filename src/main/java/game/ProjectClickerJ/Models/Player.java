@@ -17,11 +17,11 @@ public class Player {
     private int gold;
     @Column
     private int xp;
-    @OneToMany
+    @ManyToMany
     private List<Weapon> InventoryWeapon;
-    @OneToMany
+    @ManyToMany
     private List<Champion> InventoryChampion;
-    @OneToMany
+    @ManyToMany
     private List<Team> InventoryTeams;
     @ManyToOne
     private Team selectedTeam;

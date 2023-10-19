@@ -48,10 +48,9 @@ public class WeaponController {
     @Transactional
     public String buyWeapon(HttpSession session, Long weaponId) {
         Long currentPlayerId = (Long) session.getAttribute("player");
-
         Optional<Player> player = playerRepo.findById(currentPlayerId);
-
         Optional<Weapon> weapon = weaponRepo.findById(weaponId);
+
         if (player.isEmpty() || weapon.isEmpty()) {
             System.out.println("player or champion not found");
             throw new RuntimeException("player or champion not found");
@@ -59,11 +58,13 @@ public class WeaponController {
             Player playerInstance = player.get();
             Weapon weaponInstance = weapon.get();
 
-            playerInstance.getInventoryWeapon().add(weaponInstance);
+            List<Weapon> playerWeapons = playerInstance.getInventoryWeapon();
+            playerWeapons.add(weaponInstance);
+            playerInstance.setInventoryWeapon(playerWeapons);
             playerRepo.save(playerInstance);
         }
 
-        return "redirect:/shopChampion";
+        return "redirect:/shopWeapon";
     }
 
 

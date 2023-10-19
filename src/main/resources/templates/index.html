@@ -7,9 +7,13 @@
 
 </head>
 <body>
+
 <video autoplay loop muted playsinline poster="">
     <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
 </video>
+
+
+
 
 
 <div class="menu">
@@ -17,20 +21,18 @@
         <h3> Shop </h3>
         <a href="shopWeapon"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
         <a href="shopChampion"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
-    </div>
+        <div class="fond">
+            <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam" >
+        </div>
 
-    <div class="team">
 
-        <div class="containerLogo">
-        <a href="selectTeam"><img th:src="@{/teamIcon.jpg}" alt="weaponShop" class="losange-image"></a>
+        <div class="settings">
+            <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>
         </div>
     </div>
 
-    <div class="settings">
-        <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="rounded-image"></a>
-    </div>
-
 </div>
+
 
 </body>
 </html>
