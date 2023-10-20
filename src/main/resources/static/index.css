@@ -66,6 +66,31 @@ video {
     bottom : 10px;
 }
 
+
+.menu .shop img{
+}
+
+.fond{
+    background:linear-gradient(121deg,
+    rgba(64,252,121,1) 0%,
+    rgba(252,63,251,1) 39%,
+    rgba(107,0,255,1) 93%);
+    background-size: 300% 300%;
+    animation: gradient-animation 10s ease infinite;
+    display: inline-block;
+}
+
+@keyframes gradient-animation {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}}
+
+.fond img {
+    max-width: 100%; /* La largeur de l'image ne dépassera pas la largeur de la div */
+    height: auto;
+
+}
+
 #top-user-info{
     background-image: linear-gradient(to right, #687460, #0E1313 40%);
     opacity:0.6;

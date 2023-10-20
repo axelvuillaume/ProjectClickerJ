@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" th:href="@{/index.css}">
 
 </head>
 <body>
-<video autoplay loop muted playsinline poster="" id="back-video">
-    <source src="../static/AhriWallpaper.mp4" type="video/mp4">
+
+<video autoplay loop muted playsinline poster=""  id="back-video">
+    <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
+
 </video>
 
 <div id="top-user-info">
@@ -24,24 +26,33 @@
 </div>
 
 
+
+
+
 <div class="menu">
     <div class="shop">
-        <a href="shopWeapon.html"><img src="../static/sword-removebg-preview.png" alt="weaponShop"></a>
-        <a href="shopChampion.html"><img src="../static/shopChampion.png" alt="championShop"></a>
+        <h3> Shop </h3>
+        <a href="shopWeapon"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
+        <a href="shopChampion"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
+        <div class="fond">
+            <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam" >
+        </div>
     </div>
 
     <div class="team">
 
         <div class="containerLogo">
-        <a href="selectTeam.html"><img src="../static/teamIcon.jpg" alt="weaponShop" class="losange-image"></a>
+        <a href="selectTeam"><img th:src="@{/teamIcon.jpg}" alt="weaponShop" class="losange-image"></a>
+        </div>
+
+
+        <div class="settings">
+            <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>
         </div>
     </div>
 
-    <div class="settings">
-        <a href="shop.html"><img src="../static/settingsIcon.jpg" alt="weaponShop" class="rounded-image"></a>
-    </div>
-
 </div>
+
 
 </body>
 </html>

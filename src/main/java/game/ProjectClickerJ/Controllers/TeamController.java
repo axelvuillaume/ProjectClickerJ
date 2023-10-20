@@ -35,8 +35,10 @@ public class TeamController {
     PlayerRepository playerRepo;
 
     @GetMapping("/addTeam")
-    public String listOwnedWeaponsChampions(Model model) {
-        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
+    public String listOwnedWeaponsChampions(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
         if (player.isEmpty()) {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
@@ -57,9 +59,9 @@ public class TeamController {
     @PostMapping("/addTeam")
     public String addTeam(String name, Long championId, Long weaponId, HttpSession session) {
 
-        // Long playerId = (Long) session.getAttribute("playerId");
+        Long currentPlayerId = (Long) session.getAttribute("player");
 
-        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
 
 
         if (player.isEmpty()) {
@@ -97,8 +99,10 @@ public class TeamController {
     }
 
     @GetMapping("selectTeam")
-    public String listTeams(Model model) {
-        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
+    public String listTeams(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
         if (player.isEmpty()) {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
@@ -114,7 +118,9 @@ public class TeamController {
 
     @PostMapping("/selectTeam")
     public String selectTeam(Long teamId, HttpSession session) {
-        Optional<Player> player = playerRepo.findById(20L /*playerId*/);
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
         if (player.isEmpty()) {
             System.out.println("player not found");
             throw new RuntimeException("player not found");

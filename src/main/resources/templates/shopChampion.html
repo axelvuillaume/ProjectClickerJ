@@ -6,16 +6,6 @@
 </head>
 <body>
 
-<form action="equipChampion" method="POST">
-    <select id="championsOwned" name="championId">
-        <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
-            <span th:text="${champ.name}"></span>
-        </option>
-    </select>
-
-    <button type="submit">Equipe</button>
-</form>
-
 <form action="shopChampion" method="POST">
     <select id="championsNotOwned" name="championId">
         <option th:each="noChamp : ${championsNotOwned}" th:value="${noChamp.id}">
