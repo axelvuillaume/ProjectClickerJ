@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import game.ProjectClickerJ.Utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,22 @@ public class TeamController {
     @Autowired
     PlayerRepository playerRepo;
 
+    public void listTeams(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        List<Team> teamsOwned = player.get().getInventoryTeams();
+        model.addAttribute("teamsOwned",teamsOwned);
+
+    }
+
+
+
     @GetMapping("/addTeam")
     public String listOwnedWeaponsChampions(Model model, HttpSession session) {
         Long currentPlayerId = (Long) session.getAttribute("player");
@@ -47,29 +66,21 @@ public class TeamController {
         List<Champion> championsOwned = player.get().getInventoryChampion();
         List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
 
-
-
-
         model.addAttribute("championsOwned",championsOwned);
         model.addAttribute("weaponsOwned",weaponsOwned);
-
         return "addTeam";
     }
 
     @PostMapping("/addTeam")
     public String addTeam(String name, Long championId, Long weaponId, HttpSession session) {
-
         Long currentPlayerId = (Long) session.getAttribute("player");
-
         Optional<Player> player = playerRepo.findById(currentPlayerId);
-
 
         if (player.isEmpty()) {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
         } else {
             Player playerInstance = player.get();
-
 
             Optional<Weapon> weapon = weaponRepo.findById(weaponId);
             if (weapon.isEmpty()) {
@@ -99,19 +110,8 @@ public class TeamController {
     }
 
     @GetMapping("selectTeam")
-    public String listTeams(Model model, HttpSession session) {
-        Long currentPlayerId = (Long) session.getAttribute("player");
-
-        Optional<Player> player = playerRepo.findById(currentPlayerId);
-        if (player.isEmpty()) {
-            System.out.println("player not found");
-            throw new RuntimeException("player not found");
-        }
-
-        List<Team> teamsOwned = player.get().getInventoryTeams();
-        model.addAttribute("teamsOwned",teamsOwned);
-
-
+    public String GetTeams(Model model, HttpSession session) {
+        listTeams(model,session);
         return "selectTeam";
     }
 
@@ -138,6 +138,67 @@ public class TeamController {
         }
 
         return "selectTeam";
+    }
+
+
+    @GetMapping("modifyTeam")
+    public String listTeams2(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        List<Team> teamsOwned = player.get().getInventoryTeams();
+        model.addAttribute("teamsOwned",teamsOwned);
+
+
+        //Champion et Weapon Owned
+        List<Champion> championsOwned = player.get().getInventoryChampion();
+        List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
+
+        model.addAttribute("championsOwned",championsOwned);
+        model.addAttribute("weaponsOwned",weaponsOwned);
+
+        return "modifyTeam";
+    }
+
+    @PatchMapping("modifyTeam")
+    public String modifyTeam(Long championId, Long weaponId,Long teamId){
+
+        Optional<Weapon> weapon = weaponRepo.findById(weaponId);
+        if (weapon.isEmpty()) {
+            System.out.println("weapon not found");
+            throw new RuntimeException("weapon not found");
+        }
+
+        Optional<Champion> champion = championRepo.findById(championId);
+        if (champion.isEmpty()) {
+            System.out.println("champion not found");
+            throw new RuntimeException("champion not found");
+        }
+
+        Optional<Team> team = teamRepo.findById(teamId);
+        if (team.isEmpty()) {
+            System.out.println("team not found");
+            throw new RuntimeException("team not found");
+        }
+
+        team.get().setChampion(champion.get());
+        team.get().setWeapon(weapon.get());
+
+        teamRepo.save(team.get());
+
+
+        return "redirect:/modifyTeam";
+    }
+
+    @GetMapping("deleteTeam")
+    public String GetTeamsDelete(Model model, HttpSession session) {
+        listTeams(model,session);
+        return "deleteTeam";
     }
 }
 
