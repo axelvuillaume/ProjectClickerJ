@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="selectTeam" method="POST">
+
+    <select id="teamSelected" name="teamId">
+        <option th:each="team : ${teamsOwned}" th:value="${team.id}">
+            <span th:text="${team.name}"></span>
+        </option>
+    </select>
+
+    <button type="submit">Delete</button>
+</form>
+
+
+</body>
+</html>
