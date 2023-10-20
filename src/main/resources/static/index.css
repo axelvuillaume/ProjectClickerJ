@@ -66,6 +66,7 @@ video {
     bottom : 10px;
 }
 
+
 .menu .shop img{
 }
 
@@ -84,7 +85,55 @@ video {
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}}
 
-.fond img{
+.fond img {
     max-width: 100%; /* La largeur de l'image ne dépassera pas la largeur de la div */
     height: auto;
+
+}
+
+#top-user-info{
+    background-image: linear-gradient(to right, #687460, #0E1313 40%);
+    opacity:0.6;
+    border-radius: 15px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    height: 70px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#inside-user-info{
+    text-align: right;
+    flex: 1;
+}
+
+.text-in-user{
+    display: block;
+}
+
+#psudo-name{
+    color: aliceblue;
+    font-size: 30px;
+}
+
+#gold{
+    color: #D7B573;
+}
+
+#user-icon{
+    flex:0;
+}
+
+#user-icon-img{
+    margin-right: -20px;
+    width: 80px;
+    height: 70px;
+}
+#progressBar{
+    width: 90%;
+    margin-bottom: -1%;
+
 }
