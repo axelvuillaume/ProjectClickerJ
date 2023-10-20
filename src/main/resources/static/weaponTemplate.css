@@ -1,0 +1,25 @@
+
+.body{
+    overflow: scroll;
+}
+
+.grid-container {
+     position: absolute;
+     top: 30%;
+     left: 15%;
+     height: auto;
+     width: 75%;
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     grid-gap: 10px;
+     padding: 20px;
+     z-index: 1;
+ }
+
+.grid-item {
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    height: 300px;
+}
