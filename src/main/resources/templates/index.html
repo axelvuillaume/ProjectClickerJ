@@ -7,9 +7,26 @@
 
 </head>
 <body>
-<video autoplay loop muted playsinline poster="">
+
+<video autoplay loop muted playsinline poster=""  id="back-video">
     <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
+
 </video>
+
+<div id="top-user-info">
+    <div id="inside-user-info">
+        <i class="text-in-user" id="psudo-name">FIFTY</i>
+        <i class="text-in-user" id="gold">GOLD</i>
+        <progress id="progressBar" value="0" max="100"></progress>
+    </div>
+    <div id="user-icon">
+        <img id="user-icon-img" src="../static/pg.png" alt="">
+    </div>
+
+</div>
+
+
+
 
 
 <div class="menu">
@@ -17,6 +34,9 @@
         <h3> Shop </h3>
         <a href="shopWeapon"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
         <a href="shopChampion"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
+        <div class="fond">
+            <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam" >
+        </div>
     </div>
 
     <div class="team">
@@ -24,13 +44,15 @@
         <div class="containerLogo">
         <a href="selectTeam"><img th:src="@{/teamIcon.jpg}" alt="weaponShop" class="losange-image"></a>
         </div>
-    </div>
 
-    <div class="settings">
-        <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="rounded-image"></a>
+
+        <div class="settings">
+            <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>
+        </div>
     </div>
 
 </div>
+
 
 </body>
 </html>
