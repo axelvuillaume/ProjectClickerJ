@@ -15,4 +15,9 @@ public class PageController {
     public String getIndexPage(Model model) {
         return "index";
     }
+
+    @GetMapping("/test")
+    public String getTestPage(Model model) {
+        return "testComponent";
+    }
 }
