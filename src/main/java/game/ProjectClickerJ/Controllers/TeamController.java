@@ -13,10 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.*;
 import game.ProjectClickerJ.Utils.Utils;
 
 import java.util.ArrayList;
@@ -200,6 +197,40 @@ public class TeamController {
         listTeams(model,session);
         return "deleteTeam";
     }
+
+    @DeleteMapping("deleteTeam")
+    public String deleteTeam(Long teamId,HttpSession session){
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        Optional<Team> team = teamRepo.findById(teamId);
+        if (team.isEmpty()) {
+            System.out.println("team not found");
+            throw new RuntimeException("team not found");
+        }
+
+        List<Team> inventoryTeams = player.get().getInventoryTeams();
+
+        List<Team> teamsToKeep = new ArrayList<>();
+        for (Team inventoryTeam : inventoryTeams) {
+            if (!inventoryTeam.equals(team.get())) {
+                teamsToKeep.add(inventoryTeam);
+            }
+        }
+
+        player.get().setInventoryTeams(teamsToKeep);
+
+        teamRepo.delete(team.get());
+
+        return "deleteTeam";
+    }
+
 }
 
 
