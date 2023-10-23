@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<form action="selectTeam" method="POST">
+<form id="deleteTeamForm" method="POST">
 
-    <select id="teamSelected" name="teamId">
+    <select name="teamId">
         <option th:each="team : ${teamsOwned}" th:value="${team.id}">
             <span th:text="${team.name}"></span>
         </option>
@@ -15,6 +15,30 @@
 
     <button type="submit">Delete</button>
 </form>
+
+<script>
+    document.getElementById("deleteTeamForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+
+        fetch("/deleteTeam", {
+            method: "DELETE",
+            body: new FormData(this)
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    // La requête PATCH a réussi
+                    window.location.href = "/deleteTeam"; // Redirigez l'utilisateur vers la page de succès
+                } else {
+                    console.error("Erreur lors de la requête PATCH");
+                    // Gérer l'erreur ici
+                }
+            })
+            .catch(error => {
+                console.error("Erreur lors de la requête PATCH", error);
+                // Gérer l'erreur ici
+            });
+    });
+</script>
 
 
 </body>
