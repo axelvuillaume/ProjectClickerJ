@@ -1,25 +1,78 @@
+body{
+    position: relative;
+}
 
-.body{
-    overflow: scroll;
+.main-body-template{
+    height: 100vh;
+    width: 100vw;
+}
+
+video{
+    position: fixed;
+    filter: blur(5px);
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    margin-left: 8%;
+    padding-top: 14vh;
+
 }
 
 .grid-container {
-     position: absolute;
-     top: 30%;
-     left: 15%;
-     height: auto;
-     width: 75%;
-     display: grid;
-     grid-template-columns: repeat(3, 1fr);
-     grid-gap: 10px;
-     padding: 20px;
-     z-index: 1;
- }
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
 
-.grid-item {
-    background-color: #3498db;
-    color: #fff;
-    text-align: center;
+    height: calc(120vh - 60vh);
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+}
+
+
+.grid-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.game-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px;
-    height: 300px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+    height: calc(110vh - 55vh); /* make each grid item the height of the viewport minus padding */
+    scroll-snap-align: start;
+}
+
+
+
+.game-image {
+    max-width: 80%;
+    margin-bottom: 20px;
+}
+.game-item button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.game-item button:hover {
+    background-color: #45a049;
 }
