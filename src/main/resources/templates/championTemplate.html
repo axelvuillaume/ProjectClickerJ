@@ -29,42 +29,9 @@
     <div class="content-wrapper">
 
         <div class="grid-container">
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 1 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 3 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 1 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 3 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 1 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/rakan.jpg}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
+            <div th:replace="Component/WeaponCard :: weaponCard"></div>
+
+
         </div>
     </div>
 

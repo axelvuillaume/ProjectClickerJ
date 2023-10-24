@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>card</title>
+</head>
+<body>
+<div class="card game-item" th:fragment="card(imageUrl)">
+        <img th:src="@{${imageUrl}}" alt="Game Item 1 Image" class="game-image"/>
+        <button>Buy</button>
+</div>
+</body>
+</html>
