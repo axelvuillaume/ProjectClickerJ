@@ -16,8 +16,6 @@ import java.util.Optional;
 public class Utils {
     public static boolean IsNotLogin(HttpSession session, PlayerRepository playerRepo) {
         Long currentPlayerId = (Long) session.getAttribute("player");
-
-        Optional<Player> player = playerRepo.findById(currentPlayerId);
-        return player.isEmpty();
+        return currentPlayerId == null;
     }
 }
