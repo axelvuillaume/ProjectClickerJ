@@ -23,29 +23,14 @@
             <div id="user-icon">
                 <img id="user-icon-img" th:src="@{/pg.png}" alt="">
             </div>
-
         </div>
+
     </div>
 </div>
 
-<div>
-    <div class="menu">
-        <div class="shop">
-            <a href="shopWeapon"><img th:src="@{/sword.png}" alt="weaponShop"></a>
-            <a href="shopChampion"><img th:src="@{/shopChampion.png}" alt="championShop"></a>
-            <div class="fond">
-                <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam" >
-            </div>
-        </div>
 
-        <div class="team">
+<div th:replace="Component/SideBar :: sideBar"></div>
 
-            <div class="settings">
-                <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>
-            </div>
-        </div>
-    </div>
 
-</div>
 </body>
 </html>

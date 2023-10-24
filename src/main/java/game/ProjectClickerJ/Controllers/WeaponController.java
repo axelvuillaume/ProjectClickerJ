@@ -4,6 +4,7 @@ import game.ProjectClickerJ.Models.Player;
 import game.ProjectClickerJ.Models.Weapon;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
 import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
+import game.ProjectClickerJ.Utils.Utils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class WeaponController {
 
     @GetMapping("/shopWeapon")
     public String listWeapons(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
         List<Weapon> weaponsNotOwned = weaponRepo.findAll();
 
         Long currentPlayerId = (Long) session.getAttribute("player");
@@ -47,6 +51,9 @@ public class WeaponController {
     @PostMapping("/shopWeapon")
     @Transactional
     public String buyWeapon(HttpSession session, Long weaponId) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
         Long currentPlayerId = (Long) session.getAttribute("player");
         Optional<Player> player = playerRepo.findById(currentPlayerId);
         Optional<Weapon> weapon = weaponRepo.findById(weaponId);

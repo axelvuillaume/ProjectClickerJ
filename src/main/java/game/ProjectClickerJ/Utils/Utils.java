@@ -14,5 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class Utils {
-
+    public static boolean IsNotLogin(HttpSession session, PlayerRepository playerRepo) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        return currentPlayerId == null;
+    }
 }
