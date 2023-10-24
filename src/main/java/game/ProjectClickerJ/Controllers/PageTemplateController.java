@@ -11,4 +11,10 @@ public class PageTemplateController {
     public String getConnexionPage(Model model) {
         return "weaponTemplate";
     }
+
+    @GetMapping("/championTemplate")
+    public String getConnextionPage(Model model){
+        return "championTemplate";
+    }
 }
+
