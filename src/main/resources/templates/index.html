@@ -10,7 +10,6 @@
 
 <video autoplay loop muted playsinline poster=""  id="back-video">
     <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
-
 </video>
 
 <div id="top-user-info">
@@ -25,23 +24,7 @@
 
 </div>
 
-<div class="menu">
-    <div class="shop">
-        <a href="shopWeapon"><img th:src="@{/sword-zelda.png}" alt="weaponShop"></a>
-        <a href="shopChampion"><img th:src="@{/shopChampion.png}" alt="championShop"></a>
-        <div class="fond">
-            <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam" >
-        </div>
-    </div>
-
-    <div class="team">
-
-        <div class="settings">
-            <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>
-        </div>
-    </div>
-
-</div>
+<div th:replace="Component/SideBar :: sideBar"></div>
 
 
 </body>

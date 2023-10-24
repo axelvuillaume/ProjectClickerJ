@@ -52,6 +52,9 @@ public class TeamController {
 
     @GetMapping("/addTeam")
     public String listOwnedWeaponsChampions(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
         Long currentPlayerId = (Long) session.getAttribute("player");
 
         Optional<Player> player = playerRepo.findById(currentPlayerId);
@@ -70,6 +73,9 @@ public class TeamController {
 
     @PostMapping("/addTeam")
     public String addTeam(String name, Long championId, Long weaponId, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
         Long currentPlayerId = (Long) session.getAttribute("player");
         Optional<Player> player = playerRepo.findById(currentPlayerId);
 
@@ -108,6 +114,9 @@ public class TeamController {
 
     @GetMapping("selectTeam")
     public String GetTeams(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
         listTeams(model,session);
         return "selectTeam";
     }
@@ -115,6 +124,10 @@ public class TeamController {
 
     @PostMapping("/selectTeam")
     public String selectTeam(Long teamId, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
+
         Long currentPlayerId = (Long) session.getAttribute("player");
 
         Optional<Player> player = playerRepo.findById(currentPlayerId);
@@ -140,6 +153,10 @@ public class TeamController {
 
     @GetMapping("modifyTeam")
     public String listTeams2(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
+
         Long currentPlayerId = (Long) session.getAttribute("player");
 
         Optional<Player> player = playerRepo.findById(currentPlayerId);
@@ -163,7 +180,10 @@ public class TeamController {
     }
 
     @PatchMapping("modifyTeam")
-    public String modifyTeam(Long championId, Long weaponId,Long teamId){
+    public String modifyTeam(Long championId, Long weaponId,Long teamId, HttpSession session){
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
 
         Optional<Weapon> weapon = weaponRepo.findById(weaponId);
         if (weapon.isEmpty()) {
@@ -194,12 +214,18 @@ public class TeamController {
 
     @GetMapping("deleteTeam")
     public String GetTeamsDelete(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
         listTeams(model,session);
         return "deleteTeam";
     }
 
     @DeleteMapping("deleteTeam")
     public String deleteTeam(Long teamId,HttpSession session){
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
 
         Long currentPlayerId = (Long) session.getAttribute("player");
 
