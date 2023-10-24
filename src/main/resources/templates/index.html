@@ -14,20 +14,9 @@
     </video>
 
     <div class="right-section">
-        <div id="top-user-info">
-            <div id="inside-user-info">
-                <i class="text-in-user" id="psudo-name">FIFTY</i>
-                <i class="text-in-user" id="gold">GOLD</i>
-                <progress id="progressBar" value="0" max="100"></progress>
-            </div>
-            <div id="user-icon">
-                <img id="user-icon-img" th:src="@{/pg.png}" alt="">
-            </div>
-        </div>
-
+        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
     </div>
 </div>
-
 
 <div th:replace="Component/SideBar :: sideBar"></div>
 
