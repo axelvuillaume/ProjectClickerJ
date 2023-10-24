@@ -20,31 +20,21 @@
         <progress id="progressBar" value="0" max="100"></progress>
     </div>
     <div id="user-icon">
-        <img id="user-icon-img" src="../static/pg.png" alt="">
+        <img id="user-icon-img" th:src="@{/pg.png}" alt="">
     </div>
 
 </div>
 
-
-
-
-
 <div class="menu">
     <div class="shop">
-        <h3> Shop </h3>
-        <a href="shopWeapon"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
-        <a href="shopChampion"><img th:src="@{/sword-removebg-preview.png}" alt="weaponShop"></a>
+        <a href="shopWeapon"><img th:src="@{/sword-zelda.png}" alt="weaponShop"></a>
+        <a href="shopChampion"><img th:src="@{/shopChampion.png}" alt="championShop"></a>
         <div class="fond">
             <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam" >
         </div>
     </div>
 
     <div class="team">
-
-        <div class="containerLogo">
-        <a href="selectTeam"><img th:src="@{/teamIcon.jpg}" alt="weaponShop" class="losange-image"></a>
-        </div>
-
 
         <div class="settings">
             <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>

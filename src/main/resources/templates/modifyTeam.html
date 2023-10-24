@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="modifyTeamForm" method="POST">
+    <select  name="teamId" >
+        <option th:each="team : ${teamsOwned}" th:value="${team.id}">
+            <span th:text="${team.name}"></span>
+        </option>
+    </select>
+
+    <select id="weaponSelected" name="championId">
+        <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
+            <span th:text="${champ.name}"></span>
+        </option>
+    </select>
+
+    <select  id="championSelected" name="weaponId">
+        <option th:each="weap : ${weaponsOwned}" th:value="${weap.id}">
+            <span th:text="${weap.name}"></span>
+        </option>
+    </select>
+
+    <button type="submit">modifyTeam</button>
+</form>
+
+<script>
+    document.getElementById("modifyTeamForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+
+        fetch("/modifyTeam", {
+            method: "PATCH",
+            body: new FormData(this) // Envoie les données du formulaire
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    // La requête PATCH a réussi
+                    window.location.href = "/modifyTeam"; // Redirigez l'utilisateur vers la page de succès
+                } else {
+                    console.error("Erreur lors de la requête PATCH");
+                    // Gérer l'erreur ici
+                }
+            })
+            .catch(error => {
+                console.error("Erreur lors de la requête PATCH", error);
+                // Gérer l'erreur ici
+            });
+    });
+</script>
+
+
+</body>
+
+</body>
+</html>
