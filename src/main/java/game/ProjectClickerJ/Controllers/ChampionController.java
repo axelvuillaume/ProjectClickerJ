@@ -6,6 +6,7 @@ import game.ProjectClickerJ.Models.Player;
 import game.ProjectClickerJ.ObjectRepositories.ChampionRepository;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
 import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
+import game.ProjectClickerJ.Utils.Utils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,11 @@ public class ChampionController {
 
     @GetMapping("/shopChampion")
     public String listChamps(Model model, HttpSession session) {
+
+        if (!Utils.IsNotLogin(session,  playerRepo)) {
+            return "index";
+        }
+
         List<Champion> championsNotOwned = championRepo.findAll();
 
         Long currentPlayerId = (Long) session.getAttribute("player");
@@ -48,6 +54,7 @@ public class ChampionController {
             throw new RuntimeException("player not found");
 
         }
+
 
         List<Champion> championsOwned = player.get().getInventoryChampion();
 
@@ -89,6 +96,11 @@ public class ChampionController {
     /*@PostMapping("/shopChampion")
     @Transactional
     public String buyChampion(HttpSession session, Long championId) {
+
+        if (!Utils.IsNotLogin(session,  playerRepo)) {
+            return "index";
+        }
+
         Long currentPlayerId = (Long) session.getAttribute("player");
         Optional<Player> player = playerRepo.findById(currentPlayerId);
         Optional<Champion> champion = championRepo.findById(championId);
