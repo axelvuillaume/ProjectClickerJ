@@ -4,8 +4,34 @@
     <title>weaponCard</title>
 </head>
 <body>
-<div th:fragment="weaponCard">
-    <div th:replace="Component/Card :: card('/rakan.jpg')"></div>
+<div th:fragment="weaponCard(image, nom, description, id, owned)">
+
+    <div th:replace="Component/Card :: card(${image}, ${nom}, ${description}, 'buyWeaponButton-' + ${id}, ${owned})"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buyButton = document.getElementById('buyWeaponButton-' + [[${id}]]);
+
+            if(buyButton) {
+                buyButton.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    try {
+                        fetch('shopWeapon', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({weaponId: [[${id}]]})
+                        }).then(() => {
+                            location.reload();
+                        })
+
+                    } catch (e) {
+                        console.log("error" + e);
+                    }
+                });
+            }
+        });
+    </script>
 </div>
 </body>
 </html>

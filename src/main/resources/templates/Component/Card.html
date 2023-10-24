@@ -4,9 +4,14 @@
     <title>card</title>
 </head>
 <body>
-<div class="card game-item" th:fragment="card(imageUrl)">
-        <img th:src="@{${imageUrl}}" alt="Game Item 1 Image" class="game-image"/>
-        <button>Buy</button>
-</div>
+    <div class="card text-bg-dark mb-3" style="width: 13rem;" th:fragment="card(imageUrl, nom, description, buttonID, owned)">
+        <img  th:src="@{${imageUrl}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${nom}"></h5>
+            <p class="card-text" th:description="${description}"></p>
+            <a href="#" class="btn btn-primary" th:id="${buttonID}" th:if="${!owned}">Buy</a>
+            <div class="btn btn-primary" th:if="${owned}">Claimed</div>
+        </div>
+    </div>
 </body>
 </html>
