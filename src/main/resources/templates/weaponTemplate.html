@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/index.css}">
     <link rel="stylesheet" th:href="@{/weaponTemplate.css}">
 
@@ -14,83 +15,23 @@
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
     </video>
 
-    <div id="top-user-info">
-        <div id="inside-user-info">
-            <i class="text-in-user" id="psudo-name">FIFTY</i>
-            <i class="text-in-user" id="gold">GOLD</i>
-            <progress id="progressBar" value="0" max="100"></progress>
-        </div>
-        <div id="user-icon">
-            <img id="user-icon-img" th:src="@{/pg.png}" alt="">
-        </div>
-
-    </div>
+    <div class="right-section">
+        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
 
     <div class="content-wrapper">
-
         <div class="grid-container">
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 1 Image" class="game-image"/>
-                <button>Buy</button>
+            <div th:each="noWeapon : ${weaponsNotOwned}">
+                <div th:replace="Component/weaponCard :: weaponCard(${noWeapon.image}, ${noWeapon.name}, ${noWeapon.description}, ${noWeapon.id}, false)"></div>
             </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 3 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 1 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 3 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 1 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-            <div class="game-item">
-                <img th:src="@{/sword-zelda.png}" alt="Game Item 2 Image" class="game-image"/>
-                <button>Buy</button>
-            </div>
-        </div>
-    </div>
-
-
-
-</div>
-
-<div>
-    <div class="menu">
-        <div class="shop">
-            <a href="shopWeapon"><img th:src="@{/sword.png}" alt="weaponShop"></a>
-            <a href="shopChampion"><img th:src="@{/shopChampion.png}" alt="championShop"></a>
-            <div class="fond">
-                <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam" >
-            </div>
-        </div>
-
-        <div class="team">
-
-            <div class="settings">
-                <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>
+            <div th:each="weapon : ${weaponsOwned}">
+                <div th:replace="Component/weaponCard :: weaponCard(${weapon.image}, ${weapon.name}, ${weapon.description}, ${weapon.id}, true)"></div>
             </div>
         </div>
     </div>
 
 </div>
+
+<div th:replace="Component/SideBar :: sideBar"></div>
 
 </body>
 </html>

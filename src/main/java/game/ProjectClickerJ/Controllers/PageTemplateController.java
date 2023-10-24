@@ -23,11 +23,20 @@ public class PageTemplateController {
     }
 
     @GetMapping("/championTemplate")
-    public String getConnextionPage(Model model, HttpSession session){
+    public String getConnextionPage(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepository)) {
             return "connexion";
         }
         return "championTemplate";
     }
+
+    @GetMapping("/teamTemplate")
+    public String getConnexttionPage(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepository)) {
+            return "connexion";
+        }
+        return "teamTemplate";
+    }
+
 }
 
