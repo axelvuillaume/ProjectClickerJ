@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/index.css}">
     <link rel="stylesheet" th:href="@{/weaponTemplate.css}">
 
@@ -26,24 +27,19 @@
             </div>
         </div>
 
-        <div class="content-wrapper">
 
-            <div class="grid-container">
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
+    </div>
 
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
-
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
-                <div th:replace="Component/WeaponCard :: weaponCard"></div>
+    <div class="content-wrapper">
+        <div class="grid-container">
+            <div th:each="noChamp : ${championsNotOwned}">
+                <div th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.id}, false)"></div>
+            </div>
+            <div th:each="Champ : ${championsOwned}">
+                <div th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.id}, true)"></div>
             </div>
         </div>
     </div>
-
 
 
 </div>
