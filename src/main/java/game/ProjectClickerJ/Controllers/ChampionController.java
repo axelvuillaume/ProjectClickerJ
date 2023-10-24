@@ -39,8 +39,8 @@ public class ChampionController {
     @GetMapping("/shopChampion")
     public String listChamps(Model model, HttpSession session) {
 
-        if (!Utils.IsNotLogin(session,  playerRepo)) {
-            return "index";
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
         }
 
         List<Champion> championsNotOwned = championRepo.findAll();
@@ -97,8 +97,8 @@ public class ChampionController {
     @Transactional
     public String buyChampion(HttpSession session, Long championId) {
 
-        if (!Utils.IsNotLogin(session,  playerRepo)) {
-            return "index";
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
         }
 
         Long currentPlayerId = (Long) session.getAttribute("player");

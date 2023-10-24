@@ -15,6 +15,17 @@
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
     </video>
 
+    <div class="content-wrapper">
+        <div class="grid-container">
+            <div th:each="noChamp : ${championsNotOwned}">
+                <div th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.id}, false)"></div>
+            </div>
+            <div th:each="Champ : ${championsOwned}">
+                <div th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.id}, true)"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="right-section">
         <div id="top-user-info">
             <div id="inside-user-info">
@@ -27,20 +38,7 @@
             </div>
         </div>
 
-
     </div>
-
-    <div class="content-wrapper">
-        <div class="grid-container">
-            <div th:each="noChamp : ${championsNotOwned}">
-                <div th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.id}, false)"></div>
-            </div>
-            <div th:each="Champ : ${championsOwned}">
-                <div th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.id}, true)"></div>
-            </div>
-        </div>
-    </div>
-
 
 </div>
 
