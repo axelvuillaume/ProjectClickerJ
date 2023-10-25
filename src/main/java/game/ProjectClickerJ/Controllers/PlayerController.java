@@ -6,6 +6,7 @@ import game.ProjectClickerJ.Models.Weapon;
 import game.ProjectClickerJ.ObjectRepositories.ChampionRepository;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
 import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
+import game.ProjectClickerJ.Utils.Utils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,16 @@ public class PlayerController {
         return "redirect:/index";
 
     }
+
+    @GetMapping("settings")
+    public String GetTeams(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
+
+        return "settings";
+    }
+
 }
 
 

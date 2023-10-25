@@ -7,10 +7,10 @@ import lombok.Getter;
 @Entity
 public class Team {
 
-    @OneToOne
+    @ManyToOne
     private Weapon weapon;
 
-    @OneToOne
+    @ManyToOne
     private Champion champion;
 
     @Id
