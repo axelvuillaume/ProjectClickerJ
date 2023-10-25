@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Optional;
 
@@ -44,8 +45,23 @@ public class PlayerController {
             return "connexion";
         }
 
+
         return "settings";
     }
+
+    @PostMapping("/logout")
+    public String logout(SessionStatus sessionStatus, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        if (currentPlayerId != null) {
+            session.invalidate();
+
+        }
+
+        return "redirect:/connexion";
+
+    }
+
 
 }
 
