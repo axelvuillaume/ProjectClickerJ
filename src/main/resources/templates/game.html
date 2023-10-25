@@ -30,7 +30,7 @@
         img.classList.add('image-fade');
 
         function getRandomRotation() {
-            return Math.floor(Math.random() * 361); // 361 pour inclure 360
+            return Math.floor(Math.random() * 361);
         }
         const randomRotation = getRandomRotation();
         img.style.transform = `rotate(${randomRotation}deg)`;
