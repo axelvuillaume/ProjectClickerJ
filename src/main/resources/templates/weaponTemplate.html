@@ -20,11 +20,11 @@
 
     <div class="content-wrapper">
         <div class="grid-container">
-            <div th:each="noWeapon : ${weaponsNotOwned}">
-                <div th:replace="Component/weaponCard :: weaponCard(${noWeapon.image}, ${noWeapon.name}, ${noWeapon.description}, ${noWeapon.id}, false)"></div>
+            <div class="game-item" th:each="noWeapon : ${weaponsNotOwned}">
+                <div class="game-image" th:replace="Component/weaponCard :: weaponCard(${noWeapon.image}, ${noWeapon.name}, ${noWeapon.description}, ${noWeapon.id}, false)"></div>
             </div>
-            <div th:each="weapon : ${weaponsOwned}">
-                <div th:replace="Component/weaponCard :: weaponCard(${weapon.image}, ${weapon.name}, ${weapon.description}, ${weapon.id}, true)"></div>
+            <div class="game-item" th:each="weapon : ${weaponsOwned}">
+                <div class="game-image" th:replace="Component/weaponCard :: weaponCard(${weapon.image}, ${weapon.name}, ${weapon.description}, ${weapon.id}, true)"></div>
             </div>
         </div>
     </div>
