@@ -3,11 +3,6 @@ video{
     transform: scale(1.1);
 }
 
-.content-wrapper {
-    margin-top: 2vh;
-    position: relative;
-    z-index: 1;
-}
 
 .grid-container {
     display: grid;
@@ -17,8 +12,9 @@ video{
     margin: 0 auto;
     z-index: 1;
     position: relative;
+    flex-grow: 1;
 
-    height: calc(120vh - 60vh);
+    height: calc(110vh - 61vh);
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
 
@@ -56,7 +52,7 @@ video{
     justify-content: space-between;
     padding: 20px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-    height: calc(110vh - 55vh); /* make each grid item the height of the viewport minus padding */
+    height: calc(100vh - 50vh); /* make each grid item the height of the viewport minus padding */
     scroll-snap-align: start;
 }
 
