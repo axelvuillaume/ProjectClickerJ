@@ -22,6 +22,9 @@ import java.util.Optional;
 
 @Controller
 public class TeamController {
+
+    private Boolean teamExist = false ;
+
     @Autowired
     TeamRepository teamRepo;
 
@@ -73,6 +76,8 @@ public class TeamController {
 
     @PostMapping("/addTeam")
     public String addTeam(String name, Long championId, Long weaponId, HttpSession session) {
+        teamExist=false;
+
         if (Utils.IsNotLogin(session,  playerRepo)) {
             return "connexion";
         }
@@ -97,6 +102,17 @@ public class TeamController {
                 throw new RuntimeException("champion not found");
             }
 
+            //Verif team existe deja
+
+            List<Team> playerTeams =  playerInstance.getInventoryTeams();
+            for (Team team: playerTeams) {
+                if (team.getWeapon().getId().equals(weaponId) && team.getChampion().getId().equals(championId)){
+                    System.out.println("team existe deja");
+                    teamExist = true;
+                }
+            }
+
+            if(teamExist = false){
             Team team = new Team();
             team.setName(name);
             team.setChampion(champion.get());
@@ -104,11 +120,15 @@ public class TeamController {
 
             teamRepo.save(team);
 
-            playerInstance.getInventoryTeams().add(team);
+
+            playerTeams.add(team);
+            playerInstance.setInventoryTeams(playerTeams);
             playerRepo.save(playerInstance);
+
+            }
         }
 
-        return "addTeam";
+        return "redirect:/addTeam";
 
     }
 
@@ -147,7 +167,7 @@ public class TeamController {
             playerRepo.save(playerInstance);
         }
 
-        return "selectTeam";
+        return "redirect:/selectTeam";
     }
 
 
