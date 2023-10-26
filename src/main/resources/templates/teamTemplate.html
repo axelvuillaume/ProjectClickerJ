@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Champions & Weapons</title>
+    <link rel="stylesheet" th:href="@{/index.css}">
+    <link rel="stylesheet" th:href="@{/teamTemplate.css}">
+
+</head>
+<body>
+<div class="main-body-template">
+    <video autoplay loop muted playsinline poster=""  id="back-video">
+        <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
+    </video>
+    <div class="container">
+        <!-- Champion div -->
+        <div class="box">
+            <span class="arrow left-arrow">&lt;</span>
+            <span class="arrow right-arrow">&gt;</span>
+            <h3>Champion Name</h3>
+            <img src="path_to_champion_image.jpg" alt="Champion Image">
+        </div>
+
+        <!-- Weapon div -->
+        <div class="box">
+            <span class="arrow left-arrow">&lt;</span>
+            <span class="arrow right-arrow">&gt;</span>
+            <h3>Weapon Name</h3>
+            <img src="path_to_weapon_image.jpg" alt="Weapon Image">
+        </div>
+    </div>
+
+    <!-- Buttons below the divs -->
+    <div class="buttons">
+        <button>Select</button>
+        <button>Delete</button>
+        <button>Modify</button>
+    </div>
+</div>
+</body>
+</html>
+
+
+

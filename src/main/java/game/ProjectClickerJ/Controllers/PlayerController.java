@@ -1,15 +1,11 @@
 package game.ProjectClickerJ.Controllers;
 
-import game.ProjectClickerJ.Models.Champion;
 import game.ProjectClickerJ.Models.Player;
-import game.ProjectClickerJ.Models.Weapon;
-import game.ProjectClickerJ.ObjectRepositories.ChampionRepository;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
-import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
+import game.ProjectClickerJ.Utils.Utils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,8 +30,86 @@ public class PlayerController {
         }
         session.setAttribute("player", player.getId());
         return "redirect:/index";
+    }
 
+    @GetMapping("settings")
+    public String GetPlayer(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
+            return "connexion";
+        }
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        Player playerInstance = player.get();
+        model.addAttribute("player", playerInstance);
+        return "settings";
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        if (currentPlayerId != null) {
+            session.invalidate();
+        }
+        return "redirect:/connexion";
+    }
+
+
+    @PostMapping("/changePseudo")
+    public String changePseudo(HttpSession session, String name) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
+            return "connexion";
+        }
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        } else {
+            Player playerInstance = player.get();
+            if (playerInstance.getPseudo().equals(name)) {
+                return "redirect:/settings";
+            } else {
+                playerInstance.setPseudo(name);
+                playerRepo.save(playerInstance);
+                return "redirect:/settings";
+            }
+        }
+    }
+
+    @PostMapping("/changePP")
+    public String changePP(HttpSession session, String PP) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
+            return "connexion";
+        }
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        } else {
+            Player playerInstance = player.get();
+            if (playerInstance.getProfileImage() == null) {
+                playerInstance.setProfileImage(PP);
+                playerRepo.save(playerInstance);
+                return "redirect:/settings";
+
+            } else if (playerInstance.getProfileImage().equals(PP)) {
+                return "redirect:/settings";
+            } else {
+                playerInstance.setProfileImage(PP);
+                playerRepo.save(playerInstance);
+                return "redirect:/settings";
+            }
+        }
     }
 }
-
-

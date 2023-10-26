@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
 
+<h1 th:text="${player.getPseudo()}"></h1>
+
+<form method="post" action="/logout">
+    <input type="submit" value="Déconnexion">
+</form>
+
+<form method="post" action="/changePseudo">
+    <input type="text" value="" id="name" name="name" th:value="${player.getPseudo()}" >
+    <input type="submit" value="Changer Pseudo">
+</form>
+
+<form method="post" action="/changePP">
+    <input type="text" value="" id="PP" name="PP" th:value="${player.getProfileImage()}" >
+    <input type="submit" value="Changer PP">
+</form>
+
 </body>
+
 </html>
