@@ -15,11 +15,17 @@
 
     <div class="right-section">
         <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
-        <div class="content-wrapper"></div>
+        <div class="content-wrapper">
+            <img th:src="@{/bountonplaygif.gif}" alt="Description du GIF">
+        </div>
+
     </div>
+
+
 </div>
 
 <div th:replace="Component/SideBar :: sideBar"></div>
+
 
 
 </body>
