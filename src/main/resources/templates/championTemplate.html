@@ -17,7 +17,7 @@
 
     <div class="right-section">
 
-        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
         <div class="content-wrapper">
             <div class="grid-container">

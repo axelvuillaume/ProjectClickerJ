@@ -14,9 +14,8 @@
     </video>
 
     <div class="right-section">
-        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
-        <div class="content-wrapper">
-        </div>
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
+        <div class="content-wrapper"></div>
 
         <div class="boutonPlay">
             <span class="PlayText">PLAY</span>

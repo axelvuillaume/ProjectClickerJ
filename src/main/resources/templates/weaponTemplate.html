@@ -16,7 +16,7 @@
     </video>
 
     <div class="right-section">
-        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
     <div class="content-wrapper">
         <div class="grid-container">
@@ -27,11 +27,11 @@
                 <div class="game-image" th:replace="Component/weaponCard :: weaponCard(${noWeapon.image}, ${noWeapon.name}, ${noWeapon.description}, ${noWeapon.prix}, ${noWeapon.xpUnlockable}, ${noWeapon.bonus}, ${noWeapon.id}, false)"></div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
 
-<div th:replace="Component/SideBar :: sideBar"></div>
+    <div th:replace="Component/SideBar :: sideBar"></div>
 
 </body>
 </html>

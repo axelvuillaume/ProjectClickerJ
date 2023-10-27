@@ -54,6 +54,7 @@ public class ChampionController {
             throw new RuntimeException("player not found");
 
         }
+        Player playerInstance = player.get();
 
 
         List<Champion> championsOwned = player.get().getInventoryChampion();
@@ -61,6 +62,7 @@ public class ChampionController {
         championsNotOwned.removeAll(championsOwned);
         model.addAttribute("championsOwned", championsOwned);
         model.addAttribute("championsNotOwned", championsNotOwned);
+        model.addAttribute("player", playerInstance);
 
         return "championTemplate";
     }
