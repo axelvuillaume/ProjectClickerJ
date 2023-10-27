@@ -84,9 +84,16 @@ public class ChampionController {
             Player playerInstance = player.get();
             Champion championInstance = champion.get();
 
-            List<Champion> playerChampions = playerInstance.getInventoryChampion();
-            playerChampions.add(championInstance);
-            playerInstance.setInventoryChampion(playerChampions);
+            int moneyLeft = playerInstance.getGold() - championInstance.getPrix();
+            if (moneyLeft >= 0) {
+                playerInstance.setGold(moneyLeft);
+                List<Champion> playerChampions = playerInstance.getInventoryChampion();
+                playerChampions.add(championInstance);
+                playerInstance.setInventoryChampion(playerChampions);
+
+            } else {
+                System.out.println("pas assez d'argent");
+            }
             playerRepo.save(playerInstance);
         }
 
