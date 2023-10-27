@@ -15,29 +15,8 @@ import java.util.Optional;
 public class PageController {
     @Autowired
     PlayerRepository playerRepository;
-    @GetMapping("/connexion")
-    public String getConnexionPage(Model model, HttpSession session) {
-        if (!Utils.IsNotLogin(session,  playerRepository)) {
-            return "redirect:/index";
-        }
 
-        return "connexion";
-    }
-
-    @GetMapping("/error")
-    public String getErrorPage(Model model, HttpSession session) {
-        if (!Utils.IsNotLogin(session,  playerRepository)) {
-            return "/index";
-        }
-        return "/connexion";
-    }
-
-
-    @GetMapping("/")
-    public String getIndexPage(Model model, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepository)) {
-            return "redirect:/connexion";
-        }
+    public void GetPlayer(Model model, HttpSession session) {
         Long currentPlayerId = (Long) session.getAttribute("player");
 
         Optional<Player> player = playerRepository.findById(currentPlayerId);
@@ -48,6 +27,35 @@ public class PageController {
 
         Player playerInstance = player.get();
         model.addAttribute("player", playerInstance);
+    }
+
+    @GetMapping("/connexion")
+    public String getConnexionPage(Model model, HttpSession session) {
+        if (!Utils.IsNotLogin(session,  playerRepository)) {
+            return "redirect:/index";
+        }
+
+        return "connexion";
+    }
+
+    /*
+    @GetMapping("/error")
+    public String getErrorPage(Model model, HttpSession session) {
+        if (!Utils.IsNotLogin(session,  playerRepository)) {
+            return "/index";
+        }
+        return "/connexion";
+    }
+    */
+
+
+    @GetMapping("/")
+    public String getIndexPage(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepository)) {
+            return "redirect:/connexion";
+        }
+        GetPlayer(model, session);
+
         return "index";
     }
 

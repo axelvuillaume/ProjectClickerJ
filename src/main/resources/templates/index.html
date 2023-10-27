@@ -14,7 +14,7 @@
     </video>
 
     <div class="right-section">
-        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
+        <div th:if="${player != null}" th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
         <div class="content-wrapper"></div>
 
         <div class="boutonPlay">

@@ -36,6 +36,19 @@ public class ChampionController {
     @Autowired
     WeaponRepository weaponRepo;
 
+    public void GetPlayer(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        Player playerInstance = player.get();
+        model.addAttribute("player", playerInstance);
+    }
+
     @GetMapping("/shopChampion")
     public String listChamps(Model model, HttpSession session) {
 
@@ -54,15 +67,13 @@ public class ChampionController {
             throw new RuntimeException("player not found");
 
         }
-        Player playerInstance = player.get();
-
 
         List<Champion> championsOwned = player.get().getInventoryChampion();
 
         championsNotOwned.removeAll(championsOwned);
         model.addAttribute("championsOwned", championsOwned);
         model.addAttribute("championsNotOwned", championsNotOwned);
-        model.addAttribute("player", playerInstance);
+        GetPlayer(model, session);
 
         return "championTemplate";
     }
