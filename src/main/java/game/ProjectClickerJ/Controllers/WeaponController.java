@@ -39,18 +39,21 @@ public class WeaponController {
         List<Weapon> weaponsNotOwned = weaponRepo.findAll();
 
         Long currentPlayerId = (Long) session.getAttribute("player");
-
         Optional<Player> player = playerRepo.findById(currentPlayerId);
+
         if (player.isEmpty()) {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
         }
+
+        Player playerInstance = player.get();
 
         List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
 
         weaponsNotOwned.removeAll(weaponsOwned);
         model.addAttribute("weaponsOwned", weaponsOwned);
         model.addAttribute("weaponsNotOwned", weaponsNotOwned);
+        model.addAttribute("player", playerInstance);
 
         return "weaponTemplate";
     }

@@ -16,22 +16,25 @@
     </video>
 
     <div class="right-section">
-        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
-    <div class="content-wrapper">
-        <div class="grid-container">
-            <div class="game-item" th:each="noWeapon : ${weaponsNotOwned}">
-                <div class="game-image" th:replace="Component/weaponCard :: weaponCard(${noWeapon.image}, ${noWeapon.name}, ${noWeapon.description}, ${noWeapon.id}, false)"></div>
-            </div>
-            <div class="game-item" th:each="weapon : ${weaponsOwned}">
-                <div class="game-image" th:replace="Component/weaponCard :: weaponCard(${weapon.image}, ${weapon.name}, ${weapon.description}, ${weapon.id}, true)"></div>
+        <div class="content-wrapper">
+            <div class="grid-container">
+                <div class="game-item" th:each="noWeapon : ${weaponsNotOwned}">
+                    <div class="game-image"
+                         th:replace="Component/weaponCard :: weaponCard(${noWeapon.image}, ${noWeapon.name}, ${noWeapon.description}, ${noWeapon.id}, false)"></div>
+                </div>
+                <div class="game-item" th:each="weapon : ${weaponsOwned}">
+                    <div class="game-image"
+                         th:replace="Component/weaponCard :: weaponCard(${weapon.image}, ${weapon.name}, ${weapon.description}, ${weapon.id}, true)"></div>
+                </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
 
-<div th:replace="Component/SideBar :: sideBar"></div>
+    <div th:replace="Component/SideBar :: sideBar"></div>
 
 </body>
 </html>
