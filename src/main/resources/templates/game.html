@@ -25,6 +25,20 @@
 <video th:src="@{'/klee.mp4'}" autoplay loop muted playsinline poster=""/>
 <script>
     function handleClick(event) {
+        try {
+            fetch('addGold', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then(() => {
+
+            })
+
+        } catch (e) {
+            console.log("error" + e);
+        }
+
         const img = document.createElement('img');
         img.src = '/boom.gif?timestamp=' + new Date().getTime();
         img.classList.add('image-fade');
@@ -54,6 +68,19 @@
     }
 
     document.addEventListener('click', handleClick);
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buyButton = document.getElementById('buyChampionButton-' + [[${id}]]);
+
+        if(buyButton) {
+            buyButton.addEventListener('click', function (event) {
+                event.preventDefault();
+
+            });
+        }
+    });
 </script>
 
 </body>
