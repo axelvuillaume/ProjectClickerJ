@@ -85,14 +85,14 @@ public class ChampionController {
             Champion championInstance = champion.get();
 
             int moneyLeft = playerInstance.getGold() - championInstance.getPrix();
-            if (moneyLeft >= 0) {
+            if (moneyLeft >= 0 && playerInstance.getXp() >= championInstance.getXpUnlockable()) {
                 playerInstance.setGold(moneyLeft);
                 List<Champion> playerChampions = playerInstance.getInventoryChampion();
                 playerChampions.add(championInstance);
                 playerInstance.setInventoryChampion(playerChampions);
 
             } else {
-                System.out.println("pas assez d'argent");
+                System.out.println("pas assez d'argent ou d'xp");
             }
             playerRepo.save(playerInstance);
         }
