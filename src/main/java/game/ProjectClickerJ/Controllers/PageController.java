@@ -27,7 +27,14 @@ public class PageController {
 
         Player playerInstance = player.get();
         model.addAttribute("player", playerInstance);
-    }
+        }
+        @GetMapping("/game")
+        public String getGamePage(Model model, HttpSession session) {
+            if (Utils.IsNotLogin(session,  playerRepository)) {
+                return "game"; // change back to connexion
+            }
+            return "game";
+        }
 
     @GetMapping("/connexion")
     public String getConnexionPage(Model model, HttpSession session) {
@@ -55,7 +62,7 @@ public class PageController {
             return "redirect:/connexion";
         }
         GetPlayer(model, session);
-
+        
         return "index";
     }
 
