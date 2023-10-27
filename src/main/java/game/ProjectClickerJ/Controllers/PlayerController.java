@@ -5,11 +5,17 @@ import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
 import game.ProjectClickerJ.Utils.Utils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -45,7 +51,7 @@ public class PlayerController {
             playerRepo.save(player);
         }
         session.setAttribute("player", player.getId());
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("settings")
@@ -121,32 +127,29 @@ public class PlayerController {
         }
     }
 
-    @PostMapping("/addGold")
-    public String addGold(HttpSession session,int gold) {
-        if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
-        }
+    @PatchMapping("/addGold")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> addGold(HttpSession session) {
 
         Long currentPlayerId = (Long) session.getAttribute("player");
         Optional<Player> player = playerRepo.findById(currentPlayerId);
 
         if (player.isEmpty()) {
             System.out.println("player not found");
-            throw new RuntimeException("player not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "player not found"), HttpStatus.BAD_REQUEST);
         } else {
             Player playerInstance = player.get();
 
             int XpTotal = playerInstance.getXp();
-            playerInstance.setXp(XpTotal + gold);
+            playerInstance.setXp(XpTotal + 1);
 
             int goldTotal = playerInstance.getGold();
-            playerInstance.setGold(goldTotal + gold);
+            playerInstance.setGold(goldTotal + 5);
             playerRepo.save(playerInstance);
 
+            return  new ResponseEntity<>(Map.of("status", "success", "message", "gold claimed successfully", "newGoldValue", playerInstance.getGold()), HttpStatus.OK);
         }
 
-        // changer redirect
-        return "redirect:/testAddGold";
     }
 
 

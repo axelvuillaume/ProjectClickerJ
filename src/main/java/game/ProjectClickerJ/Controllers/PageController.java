@@ -18,16 +18,25 @@ public class PageController {
     @GetMapping("/connexion")
     public String getConnexionPage(Model model, HttpSession session) {
         if (!Utils.IsNotLogin(session,  playerRepository)) {
-            return "index";
+            return "redirect:/index";
         }
 
         return "connexion";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/error")
+    public String getErrorPage(Model model, HttpSession session) {
+        if (!Utils.IsNotLogin(session,  playerRepository)) {
+            return "/index";
+        }
+        return "/connexion";
+    }
+
+
+    @GetMapping("/")
     public String getIndexPage(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepository)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         Long currentPlayerId = (Long) session.getAttribute("player");
 
