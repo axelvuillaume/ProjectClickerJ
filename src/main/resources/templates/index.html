@@ -14,14 +14,15 @@
     </video>
 
     <div class="right-section">
-        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
-        <div class="content-wrapper">
-        </div>
+        <div th:if="${player != null}" th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
+        <div class="content-wrapper"></div>
 
+        <a href="/game">
         <div class="boutonPlay">
             <span class="PlayText">PLAY</span>
             <img th:src="@{/bountonplaygif.gif}" alt="Description du GIF">
         </div>
+        </a>
 
     </div>
 
