@@ -62,7 +62,7 @@ public class PageController {
             return "redirect:/connexion";
         }
         GetPlayer(model, session);
-        
+
         return "index";
     }
 
