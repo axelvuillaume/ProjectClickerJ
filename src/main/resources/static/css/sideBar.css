@@ -1,0 +1,67 @@
+
+.TeamText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #D7B573;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.fond {
+    background: linear-gradient(121deg,
+    #007bff 0%,
+    #8ab7e3 39%,
+    rgb(12 0 176) 93%);
+    background-size: 300% 300%;
+    animation: gradient-animation 10s ease infinite;
+    display: inline-block;
+    position: relative;
+    height: 100%;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.menu img {
+    max-width: 50%;
+}
+
+
+.boutonTeam {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.fond img {
+    max-width: 100%;
+
+}
+
+.menu {
+    display: flex;
+    width: 8%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0C1329;
+    border-right: 2px;
+    flex-direction: column;
+    text-align: center;
+    border-right: 2px solid #D7B573;
+    justify-content: space-around
+}

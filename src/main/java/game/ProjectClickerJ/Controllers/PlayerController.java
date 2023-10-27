@@ -44,7 +44,7 @@ public class PlayerController {
         Player player = playerRepo.findByPseudo(pseudo);
         if (player == null) {
             player = new Player();
-            player.setProfileImage("pg.png");
+            player.setProfileImage("deaultPp.png");
             player.setPseudo(pseudo);
             player.setXp(0);
             player.setGold(0);
