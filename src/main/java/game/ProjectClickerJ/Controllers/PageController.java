@@ -12,6 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
     @Autowired
     PlayerRepository playerRepository;
+
+    @GetMapping("/game")
+    public String getGamePage(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepository)) {
+            return "game"; // change back to connexion
+        }
+        return "game";
+    }
+
     @GetMapping("/connexion")
     public String getConnexionPage(Model model, HttpSession session) {
         if (!Utils.IsNotLogin(session,  playerRepository)) {
@@ -34,6 +43,7 @@ public class PageController {
         if (Utils.IsNotLogin(session,  playerRepository)) {
             return "redirect:/connexion";
         }
+
         return "index";
     }
 
