@@ -73,9 +73,17 @@ public class WeaponController {
             Player playerInstance = player.get();
             Weapon weaponInstance = weapon.get();
 
-            List<Weapon> playerWeapons = playerInstance.getInventoryWeapon();
-            playerWeapons.add(weaponInstance);
-            playerInstance.setInventoryWeapon(playerWeapons);
+
+            int moneyLeft = playerInstance.getGold() - weaponInstance.getPrix();
+            if (moneyLeft >= 0) {
+                List<Weapon> playerWeapons = playerInstance.getInventoryWeapon();
+                playerWeapons.add(weaponInstance);
+                playerInstance.setInventoryWeapon(playerWeapons);
+                playerInstance.setGold(moneyLeft);
+
+            } else {
+                System.out.println("pas assez d'argent");
+            }
             playerRepo.save(playerInstance);
         }
 
