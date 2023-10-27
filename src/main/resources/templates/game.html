@@ -2,86 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clicker d'image</title>
-    <style>
-        video {
-            width: 100%;
-            height: 100%;
-        }
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-        .image-fade {
-            position: absolute;
-            opacity: 1;
-            transition: opacity 1s ease-out;
-            pointer-events: none; /* Pour s'assurer que l'image ne bloque pas les futurs clics */
-        }
-    </style>
+    <title>Title</title>
 </head>
 <body>
-<video th:src="@{'/klee.mp4'}" autoplay loop muted playsinline poster=""/>
-<script>
-    function handleClick(event) {
-        try {
-            fetch('addGold', {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then(() => {
-
-            })
-
-        } catch (e) {
-            console.log("error" + e);
-        }
-
-        const img = document.createElement('img');
-        img.src = '/boom.gif?timestamp=' + new Date().getTime();
-        img.classList.add('image-fade');
-
-        function getRandomRotation() {
-            return Math.floor(Math.random() * 361);
-        }
-        const randomRotation = getRandomRotation();
-        img.style.transform = `rotate(${randomRotation}deg)`;
-
-
-
-        function getRandom() {
-            return Math.floor(Math.random() * 201) - 100;
-        }
-
-        const randomNumberX = getRandom();
-        const randomNumberY = getRandom();
-        img.style.left = (event.clientX - 180 + randomNumberX) + 'px';
-        img.style.top = (event.clientY - 180 + randomNumberY) + 'px';
-
-        document.body.appendChild(img);
-
-        setTimeout(() => {
-            img.remove();
-        }, 1010);
-    }
-
-    document.addEventListener('click', handleClick);
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const buyButton = document.getElementById('buyChampionButton-' + [[${id}]]);
-
-        if(buyButton) {
-            buyButton.addEventListener('click', function (event) {
-                event.preventDefault();
-
-            });
-        }
-    });
-</script>
 
 </body>
 </html>

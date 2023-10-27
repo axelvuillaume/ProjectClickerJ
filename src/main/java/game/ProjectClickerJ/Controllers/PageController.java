@@ -15,24 +15,15 @@ public class PageController {
     @GetMapping("/connexion")
     public String getConnexionPage(Model model, HttpSession session) {
         if (!Utils.IsNotLogin(session,  playerRepository)) {
-            return "redirect:/index";
+            return "index";
         }
         return "connexion";
     }
 
-    @GetMapping("/error")
-    public String getErrorPage(Model model, HttpSession session) {
-        if (!Utils.IsNotLogin(session,  playerRepository)) {
-            return "/index";
-        }
-        return "/connexion";
-    }
-
-
-    @GetMapping("/")
+    @GetMapping("/index")
     public String getIndexPage(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepository)) {
-            return "redirect:/connexion";
+            return "connexion";
         }
         return "index";
     }
