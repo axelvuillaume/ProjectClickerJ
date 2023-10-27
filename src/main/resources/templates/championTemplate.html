@@ -21,11 +21,11 @@
 
         <div class="content-wrapper">
             <div class="grid-container">
-                <div class="game-item" th:each="noChamp : ${championsNotOwned}">
-                    <div class="game-image" th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.id}, false)"></div>
-                </div>
                 <div class="game-item" th:each="Champ : ${championsOwned}">
-                    <div class="game-image" th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.id}, true)"></div>
+                    <div class="game-image" th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.prix}, ${Champ.xpUnlockable}, ${Champ.bonus}, ${Champ.id}, true)"></div>
+                </div>
+                <div class="game-item" th:each="noChamp : ${championsNotOwned}">
+                    <div class="game-image" th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.prix}, ${noChamp.xpUnlockable}, ${noChamp.bonus}, ${noChamp.id}, false)"></div>
                 </div>
             </div>
         </div>

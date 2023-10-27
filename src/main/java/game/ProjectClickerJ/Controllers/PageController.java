@@ -15,6 +15,15 @@ import java.util.Optional;
 public class PageController {
     @Autowired
     PlayerRepository playerRepository;
+
+    @GetMapping("/game")
+    public String getGamePage(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepository)) {
+            return "game"; // change back to connexion
+        }
+        return "game";
+    }
+
     @GetMapping("/connexion")
     public String getConnexionPage(Model model, HttpSession session) {
         if (!Utils.IsNotLogin(session,  playerRepository)) {
@@ -38,6 +47,7 @@ public class PageController {
         if (Utils.IsNotLogin(session,  playerRepository)) {
             return "redirect:/connexion";
         }
+
         Long currentPlayerId = (Long) session.getAttribute("player");
 
         Optional<Player> player = playerRepository.findById(currentPlayerId);
@@ -48,6 +58,7 @@ public class PageController {
 
         Player playerInstance = player.get();
         model.addAttribute("player", playerInstance);
+      
         return "index";
     }
 
