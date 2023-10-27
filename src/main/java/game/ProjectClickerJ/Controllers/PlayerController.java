@@ -15,8 +15,23 @@ import java.util.Optional;
 @Controller
 public class PlayerController {
 
+
     @Autowired
     PlayerRepository playerRepo;
+
+    public void GetPlayer(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        Player playerInstance = player.get();
+        model.addAttribute("player", playerInstance);
+    }
+
 
     @PostMapping("/login")
     public String login(HttpSession session, String pseudo) {
@@ -33,22 +48,14 @@ public class PlayerController {
     }
 
     @GetMapping("settings")
-    public String GetPlayer(Model model, HttpSession session) {
+    public String Getsettings(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
-        Long currentPlayerId = (Long) session.getAttribute("player");
-
-        Optional<Player> player = playerRepo.findById(currentPlayerId);
-        if (player.isEmpty()) {
-            System.out.println("player not found");
-            throw new RuntimeException("player not found");
-        }
-
-        Player playerInstance = player.get();
-        model.addAttribute("player", playerInstance);
+        GetPlayer(model, session);
         return "settings";
     }
+
 
     @PostMapping("/logout")
     public String logout(HttpSession session) {
@@ -111,5 +118,43 @@ public class PlayerController {
                 return "redirect:/settings";
             }
         }
+    }
+
+    @PostMapping("/addGold")
+    public String addGold(HttpSession session,int gold) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
+            return "connexion";
+        }
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        } else {
+            Player playerInstance = player.get();
+
+            int XpTotal = playerInstance.getXp();
+            playerInstance.setXp(XpTotal + gold);
+
+            int goldTotal = playerInstance.getGold();
+            playerInstance.setGold(goldTotal + gold);
+            playerRepo.save(playerInstance);
+
+        }
+
+        // changer redirect
+        return "redirect:/testAddGold";
+    }
+
+
+    @GetMapping("testAddGold")
+    public String GetTestAddGold(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
+            return "connexion";
+        }
+        GetPlayer(model, session);
+        return "testAddGold";
     }
 }
