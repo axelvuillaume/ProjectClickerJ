@@ -4,6 +4,8 @@ body {
     padding: 0;
     overflow: hidden;
     position: relative;
+    height: 100vh;
+    width: 100vw;
 }
 
 .main-body-template {
