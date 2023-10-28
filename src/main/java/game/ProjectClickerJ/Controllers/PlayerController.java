@@ -1,6 +1,7 @@
 package game.ProjectClickerJ.Controllers;
 
 import game.ProjectClickerJ.Models.Player;
+import game.ProjectClickerJ.Models.Team;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
 import game.ProjectClickerJ.Utils.Utils;
 import jakarta.servlet.http.HttpSession;
@@ -104,13 +105,27 @@ public class PlayerController {
             return new ResponseEntity<>(Map.of("status", "error", "message", "player not found"), HttpStatus.BAD_REQUEST);
         } else {
             Player playerInstance = player.get();
+            Team team = playerInstance.getSelectedTeam();
+            int goldTotal = playerInstance.getGold();
+
+
+
+            if (team != null ){
+                int bonus = team.getChampion().getBonus() + team.getWeapon().getBonus();
+
+                System.out.println(bonus);
+                playerInstance.setGold(goldTotal + bonus);
+
+            }else{
+                playerInstance.setGold(goldTotal + 1);
+                System.out.println("1");
+
+            }
 
             int XpTotal = playerInstance.getXp();
             playerInstance.setXp(XpTotal + 1);
-
-            int goldTotal = playerInstance.getGold();
-            playerInstance.setGold(goldTotal + 5);
             playerRepo.save(playerInstance);
+
 
             return new ResponseEntity<>(Map.of("status", "success", "message", "gold claimed successfully", "newGoldValue", playerInstance.getGold()), HttpStatus.OK);
         }
@@ -126,4 +141,6 @@ public class PlayerController {
         GetPlayer(model, session);
         return "testAddGold";
     }
+
+
 }

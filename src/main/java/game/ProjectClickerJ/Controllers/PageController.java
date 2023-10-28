@@ -33,6 +33,7 @@ public class PageController {
             if (Utils.IsNotLogin(session,  playerRepository)) {
                 return "game"; // change back to connexion
             }
+            GetPlayer(model, session);
             return "game";
         }
 
