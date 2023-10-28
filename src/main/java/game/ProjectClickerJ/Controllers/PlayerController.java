@@ -74,56 +74,21 @@ public class PlayerController {
     }
 
 
-    @PostMapping("/changePseudo")
-    public String changePseudo(HttpSession session, String name) {
-        if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
-        }
+    @PatchMapping("/modifyPlayer")
+    public ResponseEntity<Map<String, String>> modifyPlayer(HttpSession session, String name, String PP) {
 
         Long currentPlayerId = (Long) session.getAttribute("player");
         Optional<Player> player = playerRepo.findById(currentPlayerId);
 
         if (player.isEmpty()) {
             System.out.println("player not found");
-            throw new RuntimeException("player not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "Player or weapon not found"), HttpStatus.BAD_REQUEST);
         } else {
             Player playerInstance = player.get();
-            if (playerInstance.getPseudo().equals(name)) {
-                return "redirect:/settings";
-            } else {
-                playerInstance.setPseudo(name);
-                playerRepo.save(playerInstance);
-                return "redirect:/settings";
-            }
-        }
-    }
-
-    @PostMapping("/changePP")
-    public String changePP(HttpSession session, String PP) {
-        if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
-        }
-
-        Long currentPlayerId = (Long) session.getAttribute("player");
-        Optional<Player> player = playerRepo.findById(currentPlayerId);
-
-        if (player.isEmpty()) {
-            System.out.println("player not found");
-            throw new RuntimeException("player not found");
-        } else {
-            Player playerInstance = player.get();
-            if (playerInstance.getProfileImage() == null) {
-                playerInstance.setProfileImage(PP);
-                playerRepo.save(playerInstance);
-                return "redirect:/settings";
-
-            } else if (playerInstance.getProfileImage().equals(PP)) {
-                return "redirect:/settings";
-            } else {
-                playerInstance.setProfileImage(PP);
-                playerRepo.save(playerInstance);
-                return "redirect:/settings";
-            }
+            playerInstance.setProfileImage(PP);
+            playerInstance.setPseudo(name);
+            playerRepo.save(playerInstance);
+            return new ResponseEntity<>(Map.of("status", "success", "message", "Chamgement successfully"), HttpStatus.OK);
         }
     }
 
@@ -147,7 +112,7 @@ public class PlayerController {
             playerInstance.setGold(goldTotal + 5);
             playerRepo.save(playerInstance);
 
-            return  new ResponseEntity<>(Map.of("status", "success", "message", "gold claimed successfully", "newGoldValue", playerInstance.getGold()), HttpStatus.OK);
+            return new ResponseEntity<>(Map.of("status", "success", "message", "gold claimed successfully", "newGoldValue", playerInstance.getGold()), HttpStatus.OK);
         }
 
     }

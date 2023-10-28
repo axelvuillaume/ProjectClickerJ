@@ -11,10 +11,7 @@
 }
 
 .fond {
-    background: linear-gradient(121deg,
-    #007bff 0%,
-    #8ab7e3 39%,
-    rgb(12 0 176) 93%);
+    background: linear-gradient(121deg,  #007bff 0%,  #8ab7e3 39%,  rgb(12 0 176) 93%);
     background-size: 300% 300%;
     animation: gradient-animation 10s ease infinite;
     display: inline-block;
@@ -34,20 +31,15 @@
     }
 }
 
-
-.menu img {
-    max-width: 50%;
+.icon {
+    width: 25%;
 }
-
 
 .boutonTeam {
     margin: 0;
     padding: 0;
     height: 100%;
-}
-
-.fond img {
-    max-width: 100%;
+    width: 100%;
 
 }
 
@@ -65,3 +57,6 @@
     border-right: 2px solid #D7B573;
     justify-content: space-around
 }
+
+
+
