@@ -63,11 +63,17 @@
 
 <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
-<div class="selectTeam">
+<div class="selectTeam" th:if="${player.getSelectedTeam() != null}">
     <img th:src="${player.getSelectedTeam().getChampion().getImage()}"/>
     <img th:src="${player.getSelectedTeam().getChampion().getImage()}"/>
 
     <p th:text="'Bonus : ' + ${player.getSelectedTeam().getChampion().getBonus() + player.getSelectedTeam().getWeapon().getBonus()}"></p>
+
+</div>
+
+
+<div class="selectTeam" th:if="${player.getSelectedTeam() == null}">
+    <p>'Pas de Team selectionné. Bonus : 1'></p>
 
 </div>
 
