@@ -1,0 +1,38 @@
+.main-body-template .right-section .content-wrapper .form{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.main-body-template .right-section .content-wrapper .form label{
+    color: #D7B573;
+    font-size: 25px ;
+    color: white;
+}
+
+.main-body-template .right-section .content-wrapper .form > *{
+    margin-bottom: 5%;
+}
+
+
+.main-body-template .right-section .content-wrapper .form input{
+    margin: 0 auto;
+    margin-bottom: 5%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background : transparent;
+    border-bottom: solid 1px white;;
+    color: #D7B573;
+}
+
+
+.main-body-template .right-section .content-wrapper .form button{
+    margin: 0 auto;
+}
+
+
+.main-body-template .right-section .content-wrapper .form .contentTeam{
+    display:flex;
+    justify-content: space-around;
+}

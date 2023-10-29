@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main-body-template {
+    height: 100vh;
+    width: 100vw;
+}
+
+.right-section {
+    margin-left: 8%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    position: relative;
+    height: 100vh;
+}
+
+
+.content-wrapper {
+    overflow: hidden;
+    flex-grow: 2;
+    margin-top: 2vh;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+video {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
