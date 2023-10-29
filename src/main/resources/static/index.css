@@ -101,14 +101,17 @@ video {
 
 }
 
+
 .fond{
     background:linear-gradient(121deg,
-    rgba(64,252,121,1) 0%,
-    rgba(252,63,251,1) 39%,
-    rgba(107,0,255,1) 93%);
+    #007bff 0%,
+    #8ab7e3 39%,
+    rgb(12 0 176) 93%);
     background-size: 300% 300%;
     animation: gradient-animation 10s ease infinite;
     display: inline-block;
+    position: relative;
+    height: 100%;
 }
 
 @keyframes gradient-animation {
@@ -117,7 +120,7 @@ video {
     100% {background-position: 0% 50%;}}
 
 .fond img {
-    max-width: 100%; /* La largeur de l'image ne dépassera pas la largeur de la div */
+    max-width: 100%;
 
 }
 
@@ -166,4 +169,16 @@ video {
     width: 90%;
     margin-bottom: -1%;
 
+}
+
+
+.menu .shop .fond .TeamText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #D7B573;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
 }
