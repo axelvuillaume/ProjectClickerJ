@@ -121,8 +121,8 @@ public class TeamController {
 
             List<Team> playerTeams = playerInstance.getInventoryTeams();
             for (Team team : playerTeams) {
-                if (team.getWeapon().getId().equals(weaponId) && team.getChampion().getId().equals(championId)) {
-                    System.out.println("team existe deja");
+                if ((team.getWeapon().getId().equals(weaponId) && team.getChampion().getId().equals(championId) )|| team.getName().equals(name)) {
+                    System.out.println("team ou pseudo existe deja");
                     teamExist = true;
                 }
             }
