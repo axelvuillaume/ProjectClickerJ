@@ -22,7 +22,6 @@ import java.util.Optional;
 @Controller
 public class PlayerController {
 
-
     @Autowired
     PlayerRepository playerRepo;
 
@@ -77,7 +76,6 @@ public class PlayerController {
 
     @PatchMapping("/modifyPlayer")
     public ResponseEntity<Map<String, String>> modifyPlayer(HttpSession session, String name, String PP) {
-
         Long currentPlayerId = (Long) session.getAttribute("player");
         Optional<Player> player = playerRepo.findById(currentPlayerId);
 
@@ -108,24 +106,19 @@ public class PlayerController {
             Team team = playerInstance.getSelectedTeam();
             int goldTotal = playerInstance.getGold();
 
-
-
             if (team != null ){
                 int bonus = team.getChampion().getBonus() + team.getWeapon().getBonus();
-
                 System.out.println(bonus);
                 playerInstance.setGold(goldTotal + bonus);
 
             }else{
                 playerInstance.setGold(goldTotal + 1);
                 System.out.println("1");
-
             }
 
             int XpTotal = playerInstance.getXp();
             playerInstance.setXp(XpTotal + 1);
             playerRepo.save(playerInstance);
-
 
             return new ResponseEntity<>(Map.of("status", "success", "message", "gold claimed successfully", "newGoldValue", playerInstance.getGold()), HttpStatus.OK);
         }

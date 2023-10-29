@@ -3,31 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/globalPage.css}">
+    <link rel="stylesheet" th:href="@{/css/sideBar.css}">
+    <link rel="stylesheet" th:href="@{/css/addTeam.css}">
+    <link rel="stylesheet" th:href="@{/css/topUserInfo.css}">
+
 </head>
 <body>
 
+<div class="main-body-template">
+    <video autoplay loop muted playsinline poster="">
+        <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
+    </video>
 
-<form action="addTeam" method="POST">
+    <div class="right-section">
 
-    <label for="name">Name :</label>
-    <input id="name" name="name">
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
-    <select id="championSelected" name="championId">
-        <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
-            <span th:text="${champ.name}"></span>
-        </option>
-    </select>
+        <div class="content-wrapper">
+            <form action="addTeam" method="POST" class="form">
+
+                <label for="name">Name :</label>
+                <input id="name" name="name" required>
+
+                <div class="contentTeam">
+                    <select id="championSelected" name="championId">
+                        <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
+                            <span th:text="${champ.name}"></span>
+                        </option>
+                    </select>
 
 
+                    <select id="weaponSelected" name="weaponId">
+                        <option th:each="Weap : ${weaponsOwned}" th:value="${Weap.id}">
+                            <span th:text="${Weap.name}"></span>
+                        </option>
+                    </select>
+                </div>
 
-    <select id="weaponSelected" name="weaponId">
-        <option th:each="Weap : ${weaponsOwned}" th:value="${Weap.id}">
-            <span th:text="${Weap.name}"></span>
-        </option>
-    </select>
+                <button type="submit" class="btn btn-success button" >Ajouter</button>
+            </form>
 
-    <button type="submit">addTeam</button>
-</form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="Component/SideBar :: sideBar"></div>
+
+<script>
+
+</script>
 
 
 </body>

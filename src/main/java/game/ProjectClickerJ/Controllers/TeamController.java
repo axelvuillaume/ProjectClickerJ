@@ -37,6 +37,19 @@ public class TeamController {
     @Autowired
     PlayerRepository playerRepo;
 
+    public void GetPlayer(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        Player playerInstance = player.get();
+        model.addAttribute("player", playerInstance);
+    }
+
     public void listTeams(Model model, HttpSession session) {
         Long currentPlayerId = (Long) session.getAttribute("player");
 
@@ -64,12 +77,14 @@ public class TeamController {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
         }
+        Player playerInstance = player.get();
 
         List<Champion> championsOwned = player.get().getInventoryChampion();
         List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
 
         model.addAttribute("championsOwned", championsOwned);
         model.addAttribute("weaponsOwned", weaponsOwned);
+        model.addAttribute("player", playerInstance);
         return "addTeam";
     }
 

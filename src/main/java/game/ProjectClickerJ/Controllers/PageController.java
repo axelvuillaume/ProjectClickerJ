@@ -27,19 +27,21 @@ public class PageController {
 
         Player playerInstance = player.get();
         model.addAttribute("player", playerInstance);
+    }
+
+
+    @GetMapping("/game")
+    public String getGamePage(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session, playerRepository)) {
+            return "game"; // change back to connexion
         }
-        @GetMapping("/game")
-        public String getGamePage(Model model, HttpSession session) {
-            if (Utils.IsNotLogin(session,  playerRepository)) {
-                return "game"; // change back to connexion
-            }
-            GetPlayer(model, session);
-            return "game";
-        }
+        GetPlayer(model, session);
+        return "game";
+    }
 
     @GetMapping("/connexion")
     public String getConnexionPage(Model model, HttpSession session) {
-        if (!Utils.IsNotLogin(session,  playerRepository)) {
+        if (!Utils.IsNotLogin(session, playerRepository)) {
             return "redirect:/index";
         }
 
@@ -56,10 +58,9 @@ public class PageController {
     }
     */
 
-
     @GetMapping("/")
     public String getIndexPage(Model model, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepository)) {
+        if (Utils.IsNotLogin(session, playerRepository)) {
             return "redirect:/connexion";
         }
         GetPlayer(model, session);
