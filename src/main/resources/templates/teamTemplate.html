@@ -13,31 +13,48 @@
     <video autoplay loop muted playsinline poster=""  id="back-video">
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
     </video>
-    <div class="container">
-        <!-- Champion div -->
-        <div class="box">
-            <span class="arrow left-arrow">&lt;</span>
-            <span class="arrow right-arrow">&gt;</span>
-            <h3>Champion Name</h3>
-            <img src="path_to_champion_image.jpg" alt="Champion Image">
+    <div class="right-section">
+        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="box">
+                    <img src="path_to_your_image_1.jpg" alt="Description 1">
+                    <div class="arrow left-arrow">
+                        <div class="arrow-top-l"></div>
+                        <div class="arrow-bottom-l"></div>
+                    </div>
+                    <div class="arrow right-arrow">
+                        <div class="arrow-top-r"></div>
+                        <div class="arrow-bottom-r"></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <img src="path_to_your_image_2.jpg" alt="Description 2">
+                    <div class="arrow left-arrow">
+                        <div class="arrow-top-l"></div>
+                        <div class="arrow-bottom-l"></div>
+                    </div>
+                    <div class="arrow right-arrow">
+                        <div class="arrow-top-r"></div>
+                        <div class="arrow-bottom-r"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button>Select</button>
+                <button>Delete</button>
+                <button>Modify</button>
+            </div>
+
         </div>
 
-        <!-- Weapon div -->
-        <div class="box">
-            <span class="arrow left-arrow">&lt;</span>
-            <span class="arrow right-arrow">&gt;</span>
-            <h3>Weapon Name</h3>
-            <img src="path_to_weapon_image.jpg" alt="Weapon Image">
-        </div>
     </div>
 
-    <!-- Buttons below the divs -->
-    <div class="buttons">
-        <button>Select</button>
-        <button>Delete</button>
-        <button>Modify</button>
-    </div>
 </div>
+
+<div th:replace="Component/SideBar :: sideBar"></div>
+
 </body>
 </html>
 

@@ -4,7 +4,9 @@ body {
     overflow: hidden;
     position: relative;
 }
-
+i{
+    font-family: fangsong;
+}
 .main-body-template{
     height: 100vh;
     width: 100vw;
