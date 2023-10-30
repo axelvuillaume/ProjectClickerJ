@@ -36,6 +36,19 @@ public class ChampionController {
     @Autowired
     WeaponRepository weaponRepo;
 
+    public void GetPlayer(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        Player playerInstance = player.get();
+        model.addAttribute("player", playerInstance);
+    }
+
     @GetMapping("/shopChampion")
     public String listChamps(Model model, HttpSession session) {
 
@@ -55,12 +68,12 @@ public class ChampionController {
 
         }
 
-
         List<Champion> championsOwned = player.get().getInventoryChampion();
 
         championsNotOwned.removeAll(championsOwned);
         model.addAttribute("championsOwned", championsOwned);
         model.addAttribute("championsNotOwned", championsNotOwned);
+        GetPlayer(model, session);
 
         return "championTemplate";
     }
@@ -84,9 +97,16 @@ public class ChampionController {
             Player playerInstance = player.get();
             Champion championInstance = champion.get();
 
-            List<Champion> playerChampions = playerInstance.getInventoryChampion();
-            playerChampions.add(championInstance);
-            playerInstance.setInventoryChampion(playerChampions);
+            int moneyLeft = playerInstance.getGold() - championInstance.getPrix();
+            if (moneyLeft >= 0 && playerInstance.getXp() >= championInstance.getXpUnlockable()) {
+                playerInstance.setGold(moneyLeft);
+                List<Champion> playerChampions = playerInstance.getInventoryChampion();
+                playerChampions.add(championInstance);
+                playerInstance.setInventoryChampion(playerChampions);
+
+            } else {
+                System.out.println("pas assez d'argent ou d'xp");
+            }
             playerRepo.save(playerInstance);
         }
 

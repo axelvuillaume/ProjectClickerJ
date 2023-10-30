@@ -2,9 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Settings</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/sideBar.css}">
+    <link rel="stylesheet" th:href="@{/css/settings.css}">
+
 </head>
+
 <body>
 
+<div class="main-body-template">
+    <video autoplay loop muted playsinline poster=""  id="back-video">
+        <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
+    </video>
+
+    <div class="right-section">
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
+        <div class="content-wrapper">
+
+            <form method="post" id="modifyPlayer">
+                <label>Pseudo : </label>
+                <input type="text" value="" id="name" name="name" class="text" th:value="${player.getPseudo()}" />
+
+                <label>Profil Image : </label>
+                <input type="text" value="" id="PP" class="text" name="PP" th:value="${player.getProfileImage()}" />
+
+                <button type="submit" class="btn btn-success button">Apply</button>
+            </form>
+
+
+            <form method="post" action="/logout">
+                <button type="submit" class="btn btn-secondary button" >Deconnexion</button>
+            </form>
+
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div th:replace="Component/SideBar :: sideBar"></div>
+
+
+<script>
+    document.getElementById("modifyPlayer").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+
+        fetch("/modifyPlayer", {
+            method: "PATCH",
+            body: new FormData(this) // Envoie les données du formulaire
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    // La requête PATCH a réussi
+                    window.location.href = "/settings"; // Redirigez l'utilisateur vers la page de succès
+                } else {
+                    console.error("Erreur lors de la requête PATCH");
+                    // Gérer l'erreur ici
+                }
+            })
+            .catch(error => {
+                console.error("Erreur lors de la requête PATCH", error);
+                // Gérer l'erreur ici
+            });
+    });
+</script>
+
+
+
 </body>
+
 </html>

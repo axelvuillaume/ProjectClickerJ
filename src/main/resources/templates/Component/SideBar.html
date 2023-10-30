@@ -5,23 +5,22 @@
 </head>
 <body>
     <div class="menu" th:fragment="sideBar">
-        <div class="shop">
-            <a href="shopWeapon"><img th:src="@{/sword.png}" alt="weaponShop"></a>
-            <a href="shopChampion"><img th:src="@{/shopChampion.png}" alt="championShop"></a>
+            <a href="shopWeapon"><img th:src="@{/icon/sword.png}" alt="weaponShop" class="icon"></a>
+            <a href="shopChampion"><img th:src="@{/icon/shopChampion.png}" alt="championShop" class="icon" ></a>
             <a href="teamTemplate">
             <div class="fond">
                 <span class="TeamText">TEAM</span>
-                <img th:src="@{/boutonTeam.png}" alt="weaponShop" class="boutonTeam">
+                <img th:src="@{/icon/boutonTeam.png}" alt="weaponShop" class="boutonTeam">
             </div>
             </a>
-        </div>
 
-        <div class="team">
+            <a href="/"><img th:src="@{/icon/home.png}" alt="weaponShop" class="icon"></a>
+            <a href="settings"><img th:src="@{/icon/settingsIcon.png}" alt="weaponShop" class="icon"></a>
 
-            <div class="settings">
-                <a href="shop"><img th:src="@{/settingsIcon.jpg}" alt="weaponShop" class="weaponShop"></a>
-            </div>
-        </div>
+
+
+
     </div>
 </body>
 </html>
+

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/weaponTemplate.css}">
+    <link rel="stylesheet" th:href="@{/css/sideBar.css}">
 
 
 </head>
@@ -17,15 +18,15 @@
 
     <div class="right-section">
 
-        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
         <div class="content-wrapper">
             <div class="grid-container">
-                <div class="game-item" th:each="noChamp : ${championsNotOwned}">
-                    <div class="game-image" th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.id}, false)"></div>
-                </div>
                 <div class="game-item" th:each="Champ : ${championsOwned}">
-                    <div class="game-image" th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.id}, true)"></div>
+                    <div class="game-image" th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.prix}, ${Champ.xpUnlockable}, ${Champ.bonus}, ${Champ.id}, true)"></div>
+                </div>
+                <div class="game-item" th:each="noChamp : ${championsNotOwned}">
+                    <div class="game-image" th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.prix}, ${noChamp.xpUnlockable}, ${noChamp.bonus}, ${noChamp.id}, false)"></div>
                 </div>
             </div>
         </div>

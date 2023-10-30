@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/sideBar.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-
 
 </head>
 <body>
@@ -14,12 +14,23 @@
     </video>
 
     <div class="right-section">
-        <div th:replace="Component/TopUserInfo :: topUserInfo"></div>
+        <div th:if="${player != null}" th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
         <div class="content-wrapper"></div>
+
+        <a href="/game">
+        <div class="boutonPlay">
+            <span class="PlayText">PLAY</span>
+            <img th:src="@{/image0_1.gif}" alt="Description du GIF">
+        </div>
+        </a>
+
     </div>
+
+
 </div>
 
 <div th:replace="Component/SideBar :: sideBar"></div>
+
 
 
 </body>

@@ -39,18 +39,21 @@ public class WeaponController {
         List<Weapon> weaponsNotOwned = weaponRepo.findAll();
 
         Long currentPlayerId = (Long) session.getAttribute("player");
-
         Optional<Player> player = playerRepo.findById(currentPlayerId);
+
         if (player.isEmpty()) {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
         }
+
+        Player playerInstance = player.get();
 
         List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
 
         weaponsNotOwned.removeAll(weaponsOwned);
         model.addAttribute("weaponsOwned", weaponsOwned);
         model.addAttribute("weaponsNotOwned", weaponsNotOwned);
+        model.addAttribute("player", playerInstance);
 
         return "weaponTemplate";
     }
@@ -73,9 +76,17 @@ public class WeaponController {
             Player playerInstance = player.get();
             Weapon weaponInstance = weapon.get();
 
-            List<Weapon> playerWeapons = playerInstance.getInventoryWeapon();
-            playerWeapons.add(weaponInstance);
-            playerInstance.setInventoryWeapon(playerWeapons);
+
+            int moneyLeft = playerInstance.getGold() - weaponInstance.getPrix();
+            if (moneyLeft >= 0 && playerInstance.getXp() >= weaponInstance.getXpUnlockable()) {
+                List<Weapon> playerWeapons = playerInstance.getInventoryWeapon();
+                playerWeapons.add(weaponInstance);
+                playerInstance.setInventoryWeapon(playerWeapons);
+                playerInstance.setGold(moneyLeft);
+
+            } else {
+                System.out.println("pas assez d'argent ou d'xp");
+            }
             playerRepo.save(playerInstance);
         }
 

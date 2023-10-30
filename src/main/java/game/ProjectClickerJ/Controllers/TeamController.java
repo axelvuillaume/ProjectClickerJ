@@ -22,6 +22,9 @@ import java.util.Optional;
 
 @Controller
 public class TeamController {
+
+    private Boolean teamExist = false;
+
     @Autowired
     TeamRepository teamRepo;
 
@@ -34,6 +37,19 @@ public class TeamController {
     @Autowired
     PlayerRepository playerRepo;
 
+    public void GetPlayer(Model model, HttpSession session) {
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+
+        Player playerInstance = player.get();
+        model.addAttribute("player", playerInstance);
+    }
+
     public void listTeams(Model model, HttpSession session) {
         Long currentPlayerId = (Long) session.getAttribute("player");
 
@@ -44,15 +60,14 @@ public class TeamController {
         }
 
         List<Team> teamsOwned = player.get().getInventoryTeams();
-        model.addAttribute("teamsOwned",teamsOwned);
+        model.addAttribute("teamsOwned", teamsOwned);
 
     }
 
 
-
     @GetMapping("/addTeam")
     public String listOwnedWeaponsChampions(Model model, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
         Long currentPlayerId = (Long) session.getAttribute("player");
@@ -62,18 +77,23 @@ public class TeamController {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
         }
+        Player playerInstance = player.get();
 
         List<Champion> championsOwned = player.get().getInventoryChampion();
         List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
 
-        model.addAttribute("championsOwned",championsOwned);
-        model.addAttribute("weaponsOwned",weaponsOwned);
+        model.addAttribute("championsOwned", championsOwned);
+        model.addAttribute("weaponsOwned", weaponsOwned);
+        model.addAttribute("player", playerInstance);
         return "addTeam";
     }
 
     @PostMapping("/addTeam")
     public String addTeam(String name, Long championId, Long weaponId, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+
+        teamExist = false;
+
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
         Long currentPlayerId = (Long) session.getAttribute("player");
@@ -97,34 +117,51 @@ public class TeamController {
                 throw new RuntimeException("champion not found");
             }
 
-            Team team = new Team();
-            team.setName(name);
-            team.setChampion(champion.get());
-            team.setWeapon(weapon.get());
+            //Verif team existe deja
 
-            teamRepo.save(team);
+            List<Team> playerTeams = playerInstance.getInventoryTeams();
+            for (Team team : playerTeams) {
+                if ((team.getWeapon().getId().equals(weaponId) && team.getChampion().getId().equals(championId) )|| team.getName().equals(name)) {
+                    System.out.println("team ou pseudo existe deja");
+                    teamExist = true;
+                }
+            }
 
-            playerInstance.getInventoryTeams().add(team);
-            playerRepo.save(playerInstance);
+
+            if (!teamExist) {
+                Team team = new Team();
+                team.setName(name);
+                team.setChampion(champion.get());
+                team.setWeapon(weapon.get());
+
+                teamRepo.save(team);
+
+
+                playerTeams.add(team);
+                playerInstance.setInventoryTeams(playerTeams);
+                playerRepo.save(playerInstance);
+
+
+            }
         }
 
-        return "addTeam";
+        return "redirect:/addTeam";
 
     }
 
     @GetMapping("selectTeam")
     public String GetTeams(Model model, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
-        listTeams(model,session);
+        listTeams(model, session);
         return "selectTeam";
     }
 
 
     @PostMapping("/selectTeam")
     public String selectTeam(Long teamId, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
 
@@ -147,13 +184,13 @@ public class TeamController {
             playerRepo.save(playerInstance);
         }
 
-        return "selectTeam";
+        return "redirect:/selectTeam";
     }
 
 
     @GetMapping("modifyTeam")
     public String listTeams2(Model model, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
 
@@ -166,22 +203,22 @@ public class TeamController {
         }
 
         List<Team> teamsOwned = player.get().getInventoryTeams();
-        model.addAttribute("teamsOwned",teamsOwned);
+        model.addAttribute("teamsOwned", teamsOwned);
 
 
         //Champion et Weapon Owned
         List<Champion> championsOwned = player.get().getInventoryChampion();
         List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
 
-        model.addAttribute("championsOwned",championsOwned);
-        model.addAttribute("weaponsOwned",weaponsOwned);
+        model.addAttribute("championsOwned", championsOwned);
+        model.addAttribute("weaponsOwned", weaponsOwned);
 
         return "modifyTeam";
     }
 
     @PatchMapping("modifyTeam")
-    public String modifyTeam(Long championId, Long weaponId,Long teamId, HttpSession session){
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+    public String modifyTeam(Long championId, Long weaponId, Long teamId, HttpSession session) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
 
@@ -214,16 +251,16 @@ public class TeamController {
 
     @GetMapping("deleteTeam")
     public String GetTeamsDelete(Model model, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
-        listTeams(model,session);
+        listTeams(model, session);
         return "deleteTeam";
     }
 
     @DeleteMapping("deleteTeam")
-    public String deleteTeam(Long teamId,HttpSession session){
-        if (Utils.IsNotLogin(session,  playerRepo)) {
+    public String deleteTeam(Long teamId, HttpSession session) {
+        if (Utils.IsNotLogin(session, playerRepo)) {
             return "connexion";
         }
 
