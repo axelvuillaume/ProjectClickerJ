@@ -18,23 +18,28 @@
         <div class="content-wrapper">
             <div class="container">
                 <div class="box">
-                    <img src="path_to_your_image_1.jpg" alt="Description 1">
-                    <div class="arrow left-arrow">
+                    <img th:src="@{/rakan.jpg}" alt="Rakan">
+                    <div class="arrow left-arrow" id="previous-champion">
                         <div class="arrow-top-l"></div>
                         <div class="arrow-bottom-l"></div>
                     </div>
-                    <div class="arrow right-arrow">
+                    <div class="arrow right-arrow" id="next-champion">
                         <div class="arrow-top-r"></div>
                         <div class="arrow-bottom-r"></div>
                     </div>
                 </div>
                 <div class="box">
-                    <img src="path_to_your_image_2.jpg" alt="Description 2">
-                    <div class="arrow left-arrow">
+                    <img th:src="@{/item1.png}" alt="Item1">
+                    <div class="arrow left-arrow" id="previous-weapon" >
                         <div class="arrow-top-l"></div>
                         <div class="arrow-bottom-l"></div>
                     </div>
-                    <div class="arrow right-arrow">
+                    <SCRIPT>
+                        document.getElementById('next-champion').addEventListener('click',function(){
+                            
+                        });
+                    </SCRIPT>
+                    <div class="arrow right-arrow" id="next-weapon">
                         <div class="arrow-top-r"></div>
                         <div class="arrow-bottom-r"></div>
                     </div>
@@ -42,9 +47,9 @@
             </div>
 
             <div class="buttons">
-                <button>Select</button>
-                <button>Delete</button>
-                <button>Modify</button>
+                <button><a href="selectTeam.html">Select</a></button>
+                <button><a href="deleteTeam.html">Delete</a></button>
+                <button><a href="modifyTeam.html">Modify</a></button>
             </div>
 
         </div>
