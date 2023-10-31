@@ -9,8 +9,8 @@
     <div id="inside-user-info">
         <i class="text-in-user" id="psudo-name" th:text="${pseudo}" ></i>
         <i class="text-in-user" id="gold">
-            <span class="test" style="color: #D7B573;margin-right: 10px" th:text="${gold} + ' GOLD'"></span>
-            <span class="test" style="color: #407A8B;margin-right: 10px" th:text="${xp/50} + ' LVL  '"></span>
+            <span id="topGold" class="test" style="color: #D7B573;margin-right: 10px" th:text="${gold} + ' GOLD'"></span>
+            <span id="topLvl" class="test" style="color: #407A8B;margin-right: 10px" th:text="${xp/50} + ' LVL  '"></span>
         </i>
         <progress id="progressBar" th:value="${xp % 50}" max="50" style="transform: rotate(180deg);"></progress>
     </div>
