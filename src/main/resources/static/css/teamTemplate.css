@@ -25,7 +25,7 @@ video{
 .box {
     width: 30%;
     height: 400px;
-    border: 1px solid #ccc;
+    border: 1px solid #D7B573;
     padding: 20px;
     position: relative;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
@@ -53,7 +53,7 @@ video{
 .arrow-top-l,
 .arrow-bottom-l,
 .arrow-bottom-r {
-    background-color: #A7CCEA;
+    background-color: #7EA6DE;
     height: 4px;
     position: absolute;
     top: 50%;
@@ -73,7 +73,7 @@ video{
 .arrow-top-l:after,
 .arrow-bottom-l:after,
 .arrow-bottom-r:after {
-    background-color: #0CE9FF;
+    background-color: #6885D5;
     content: '';
     height: 100%;
     position: absolute;
@@ -140,7 +140,7 @@ video{
     padding: 15px 30px; /* Makes the button bigger */
     font-size: 18px;
     border-radius: 10px;
-    background-color: #51CAE6;
+    background-color: #5D76D1;
     color: white; /* Text color */
     border: none; /* No border */
     font-family: sans-serif; /* Arial font family */
@@ -149,6 +149,10 @@ video{
 }
 
 .buttons button:hover {
-    background-color: #0E98C5;
+    background-color: #6885D5;
+}
+.buttons a{
+    text-decoration: none;
+    color: inherit;
 }
 
