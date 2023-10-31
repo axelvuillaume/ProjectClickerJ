@@ -22,6 +22,37 @@ video{
     margin: 0 auto;
 }
 
+#player-wrapper{
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#player-wrapper::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+#player-wrapper::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+
+#player-wrapper::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+
+#player-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+
+
+
 .box {
     width: 30%;
     height: 400px;
@@ -137,15 +168,15 @@ video{
 }
 
 .buttons button {
-    padding: 15px 30px; /* Makes the button bigger */
+    padding: 15px 30px;
     font-size: 18px;
-    border-radius: 10px;
+    border-color: #D7B573;
     background-color: #5D76D1;
-    color: white; /* Text color */
-    border: none; /* No border */
-    font-family: sans-serif; /* Arial font family */
+    color: #D7B573;
+    font-family: "Times New Roman";
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    margin-bottom: 30px;
 }
 
 .buttons button:hover {
@@ -154,5 +185,6 @@ video{
 .buttons a{
     text-decoration: none;
     color: inherit;
+
 }
 
