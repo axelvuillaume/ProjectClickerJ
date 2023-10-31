@@ -55,11 +55,33 @@
             margin-left: 15px;
         }
 
+        #menu {
+            background-image: linear-gradient(to left, #687460, #0E1313 40%);
+            opacity: 0.6;
+            border-radius: 15px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            height: 70px;
+            width: 70px;
+            margin-top: 4%;
+            margin-left: 4%;
+        }
+        #menu img{
+            height: 50px;
+            width: 50px;
+        }
+
+
 
 
     </style>
 </head>
 <body>
+
+<a href="/" id="menu"><img th:src="@{/icon/home.png}" alt="weaponShop" class="icon"></a>
 
 <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
@@ -78,6 +100,23 @@
 
 
 <script>
+    let currentGold = [[${player.getGold()}]]
+    let currentXP = [[${player.getXp()}]]
+    const bonus = [[${player.getSelectedTeam() != null ? player.getSelectedTeam().getChampion().getBonus() + player.getSelectedTeam().getWeapon().getBonus() : 1}]]
+
+    function updateTopUser() {
+        const topGold = document.getElementById('topGold')
+        const topLvl = document.getElementById('topLvl')
+        const topProgress = document.getElementById('progressBar')
+
+        currentGold += bonus
+        currentXP += 1
+
+        topGold.innerHTML =  currentGold + " GOLD"
+        topLvl.innerHTML = Math.floor(currentXP / 50) + " LVL"
+        topProgress.value = currentXP % 50
+
+    }
     function handleClick(event) {
         try {
             fetch('addGold', {
@@ -86,7 +125,7 @@
                     'Content-Type': 'application/json'
                 },
             }).then(() => {
-
+                updateTopUser()
             })
 
         } catch (e) {
