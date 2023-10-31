@@ -78,6 +78,23 @@
 
 
 <script>
+    let currentGold = [[${player.getGold()}]]
+    let currentXP = [[${player.getXp()}]]
+    const bonus = [[${player.getSelectedTeam() != null ? player.getSelectedTeam().getChampion().getBonus() + player.getSelectedTeam().getWeapon().getBonus() : 1}]]
+
+    function updateTopUser() {
+        const topGold = document.getElementById('topGold')
+        const topLvl = document.getElementById('topLvl')
+        const topProgress = document.getElementById('progressBar')
+
+        currentGold += bonus
+        currentXP += 1
+
+        topGold.innerHTML =  currentGold + " GOLD"
+        topLvl.innerHTML = Math.floor(currentXP / 50) + " LVL"
+        topProgress.value = currentXP % 50
+
+    }
     function handleClick(event) {
         try {
             fetch('addGold', {
@@ -86,7 +103,7 @@
                     'Content-Type': 'application/json'
                 },
             }).then(() => {
-
+                updateTopUser()
             })
 
         } catch (e) {
