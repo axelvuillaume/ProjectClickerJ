@@ -15,25 +15,25 @@ public class PageTemplateController {
     PlayerRepository playerRepository;
 
     @GetMapping("/weaponTemplate")
-    public String getConnexionPage(Model model, HttpSession session) {
+    public String getWeaponTemplatePage(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepository)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         return "weaponTemplate";
     }
 
     @GetMapping("/championTemplate")
-    public String getConnextionPage(Model model, HttpSession session) {
+    public String getChampionTemplatePage(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepository)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         return "championTemplate";
     }
 
     @GetMapping("/teamTemplate")
-    public String getConnexttionPage(Model model, HttpSession session) {
+    public String getTeamTemplatePage(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepository)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         return "teamTemplate";
     }
