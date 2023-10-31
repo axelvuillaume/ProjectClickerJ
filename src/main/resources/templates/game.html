@@ -55,11 +55,33 @@
             margin-left: 15px;
         }
 
+        #menu {
+            background-image: linear-gradient(to left, #687460, #0E1313 40%);
+            opacity: 0.6;
+            border-radius: 15px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            height: 70px;
+            width: 70px;
+            margin-top: 4%;
+            margin-left: 4%;
+        }
+        #menu img{
+            height: 50px;
+            width: 50px;
+        }
+
+
 
 
     </style>
 </head>
 <body>
+
+<a href="/" id="menu"><img th:src="@{/icon/home.png}" alt="weaponShop" class="icon"></a>
 
 <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
