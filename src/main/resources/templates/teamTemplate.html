@@ -9,6 +9,42 @@
     <link rel="stylesheet" th:href="@{/css/sideBar.css}">
 </head>
 <body>
+<script>
+    var currentIndex = 0;
+
+    function getPreviousChampion() {
+        if (currentIndex > 0) {
+            currentIndex -= 1;
+            updateChampionImage();
+        } else {
+
+            currentIndex = champions.length - 1;
+            updateChampionImage();
+        }
+    }
+
+    function updateChampionImage() {
+        var imgElement = document.querySelector('.box img');
+        imgElement.src = champions[currentIndex].imageUrl;
+        imgElement.alt = champions[currentIndex].name;
+    }
+    function getNextChampion() {
+        if (currentIndex < champions.length - 1) {
+            currentIndex += 1;
+            updateChampionImage();
+        } else {
+
+            currentIndex = 0;
+            updateChampionImage();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateChampionImage);
+
+    document.querySelector('.previous-champ').addEventListener('click', getPreviousChampion);
+    document.querySelector('.next-champ').addEventListener('click', getNextChampion);
+</script>
+
 <div class="main-body-template">
     <video autoplay loop muted playsinline poster=""  id="back-video">
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
@@ -18,22 +54,23 @@
             <div class="container">
                 <div class="box">
                     <img th:src="@{/champions/rakan.jpg}" alt="Rakan">
-                    <div class="arrow left-arrow" >
+                    <div class="arrow left-arrow previous-champ">
                         <div class="arrow-top-l"></div>
                         <div class="arrow-bottom-l"></div>
                     </div>
-                    <div class="arrow right-arrow">
+                    <div class="arrow right-arrow next-champ">
                         <div class="arrow-top-r"></div>
                         <div class="arrow-bottom-r"></div>
                     </div>
                 </div>
+
                 <div class="box">
                     <img th:src="@{/weapon/item1.png}" alt="Item1">
-                    <div class="arrow left-arrow">
+                    <div class="arrow left-arrow previous-item">
                         <div class="arrow-top-l"></div>
                         <div class="arrow-bottom-l"></div>
                     </div>
-                    <div class="arrow right-arrow">
+                    <div class="arrow right-arrow next-item">
                         <div class="arrow-top-r"></div>
                         <div class="arrow-bottom-r"></div>
                     </div>
@@ -53,22 +90,22 @@
             <div class="container">
                 <div class="box">
                     <img th:src="@{/champions/rakan.jpg}" alt="Rakan">
-                    <div class="arrow left-arrow" id="previous-champion">
+                    <div class="arrow left-arrow previous-champ">
                         <div class="arrow-top-l"></div>
                         <div class="arrow-bottom-l"></div>
                     </div>
-                    <div class="arrow right-arrow" id="next-champion">
+                    <div class="arrow right-arrow next-champ">
                         <div class="arrow-top-r"></div>
                         <div class="arrow-bottom-r"></div>
                     </div>
                 </div>
                 <div class="box">
                     <img th:src="@{/weapon/item1.png}" alt="Item1">
-                    <div class="arrow left-arrow" id="previous-weapon" >
+                    <div class="arrow left-arrow previous-item">
                         <div class="arrow-top-l"></div>
                         <div class="arrow-bottom-l"></div>
                     </div>
-                    <div class="arrow right-arrow" id="next-weapon">
+                    <div class="arrow right-arrow next-item">
                         <div class="arrow-top-r"></div>
                         <div class="arrow-bottom-r"></div>
                     </div>
@@ -78,6 +115,7 @@
                     <p class="nom">Nom:</p>
                 </div>
             </div>
+
 
             <div class="buttons">
                 <button><a href="selectTeam">Select</a></button>
