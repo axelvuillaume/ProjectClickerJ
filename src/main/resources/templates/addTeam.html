@@ -28,22 +28,25 @@
                 <input id="name" name="name" required>
 
                 <div class="contentTeam">
-                    <select id="championSelected" name="championId">
-                        <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
-                            <span th:text="${champ.name}"></span>
-                        </option>
-                    </select>
-                    <div class="game-item champ" th:each="Champ : ${championsOwned}">
-                        <div class="game-image" th:attr="data-id=${Champ.id}" th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.prix}, ${Champ.xpUnlockable}, ${Champ.bonus}, ${Champ.id}, true)"></div>
+                    <div class="cardSelector">
+                        <select id="championSelected" name="championId">
+                            <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
+                                <span th:text="${champ.name}"></span>
+                            </option>
+                        </select>
+                        <div class="game-item champ" th:each="Champ : ${championsOwned}" th:attr="data-id=${Champ.id}">
+                            <div class="game-image"  th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.prix}, ${Champ.xpUnlockable}, ${Champ.bonus}, ${Champ.id}, true, false)"></div>
+                        </div>
                     </div>
-
-                    <select id="weaponSelected" name="weaponId">
-                        <option th:each="Weap : ${weaponsOwned}" th:value="${Weap.id}">
-                            <span th:text="${Weap.name}"></span>
-                        </option>
-                    </select>
-                    <div class="game-item weapon" th:each="Weap : ${weaponsOwned}">
-                        <div class="game-image" th:attr="data-id=${Weap.id}" th:replace="Component/weaponCard :: weaponCard(${Weap.image}, ${Weap.name}, ${Weap.description}, ${Weap.prix}, ${Weap.xpUnlockable}, ${Weap.bonus}, ${Weap.id}, true)"></div>
+                    <div class="cardSelector">
+                        <select id="weaponSelected" name="weaponId">
+                            <option th:each="Weap : ${weaponsOwned}" th:value="${Weap.id}">
+                                <span th:text="${Weap.name}"></span>
+                            </option>
+                        </select>
+                        <div class="game-item weapon" th:each="Weap : ${weaponsOwned}" th:attr="data-id=${Weap.id}">
+                            <div class="game-image"  th:replace="Component/weaponCard :: weaponCard(${Weap.image}, ${Weap.name}, ${Weap.description}, ${Weap.prix}, ${Weap.xpUnlockable}, ${Weap.bonus}, ${Weap.id}, true, false)"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -67,25 +70,21 @@
         // Hide champions
         const allChamps = document.querySelectorAll('.game-item.champ');
         allChamps.forEach(champ => {
-            const gameImage = champ.querySelector('.game-image');
-            console.log(gameImage)
-            if (gameImage) {
-                if (gameImage.getAttribute('data-id') !== currentChamp) {
+                if (champ.getAttribute('data-id') !== currentChamp) {
                     champ.style.display = 'none';
                 } else {
                     champ.style.display = 'block';
                 }
-            }
         });
 
         // Hide weapons
         const allWeapons = document.querySelectorAll('.game-item.weapon');
         allWeapons.forEach(weapon => {
-            if (weapon.querySelector('.game-image').getAttribute('data-id') !== currentWeapon) {
-                weapon.style.display = 'none';
-            } else {
-                weapon.style.display = 'block';
-            }
+                if (weapon.getAttribute('data-id') !== currentWeapon) {
+                    weapon.style.display = 'none';
+                } else {
+                    weapon.style.display = 'block';
+                }
         });
     }
 
