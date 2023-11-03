@@ -6,40 +6,130 @@
     <title>Select Champions & Weapons</title>
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/teamTemplate.css}">
-
+    <link rel="stylesheet" th:href="@{/css/sideBar.css}">
 </head>
 <body>
+<script>
+    var currentIndex = 0;
+
+    function getPreviousChampion() {
+        if (currentIndex > 0) {
+            currentIndex -= 1;
+            updateChampionImage();
+        } else {
+
+            currentIndex = champions.length - 1;
+            updateChampionImage();
+        }
+    }
+
+    function updateChampionImage() {
+        var imgElement = document.querySelector('.box img');
+        imgElement.src = champions[currentIndex].imageUrl;
+        imgElement.alt = champions[currentIndex].name;
+    }
+    function getNextChampion() {
+        if (currentIndex < champions.length - 1) {
+            currentIndex += 1;
+            updateChampionImage();
+        } else {
+
+            currentIndex = 0;
+            updateChampionImage();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateChampionImage);
+
+    document.querySelector('.previous-champ').addEventListener('click', getPreviousChampion);
+    document.querySelector('.next-champ').addEventListener('click', getNextChampion);
+</script>
+
 <div class="main-body-template">
     <video autoplay loop muted playsinline poster=""  id="back-video">
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
     </video>
-    <div class="container">
-        <!-- Champion div -->
-        <div class="box">
-            <span class="arrow left-arrow">&lt;</span>
-            <span class="arrow right-arrow">&gt;</span>
-            <h3>Champion Name</h3>
-            <img src="path_to_champion_image.jpg" alt="Champion Image">
+    <div class="right-section">
+        <div class="content-wrapper" id="player-wrapper">
+            <div class="container">
+                <div class="box">
+                    <img th:src="@{/champions/rakan.jpg}" alt="Rakan">
+                    <div class="arrow left-arrow previous-champ">
+                        <div class="arrow-top-l"></div>
+                        <div class="arrow-bottom-l"></div>
+                    </div>
+                    <div class="arrow right-arrow next-champ">
+                        <div class="arrow-top-r"></div>
+                        <div class="arrow-bottom-r"></div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <img th:src="@{/weapon/item1.png}" alt="Item1">
+                    <div class="arrow left-arrow previous-item">
+                        <div class="arrow-top-l"></div>
+                        <div class="arrow-bottom-l"></div>
+                    </div>
+                    <div class="arrow right-arrow next-item">
+                        <div class="arrow-top-r"></div>
+                        <div class="arrow-bottom-r"></div>
+                    </div>
+                </div>
+                <div class="bonus-container">
+                    <p class="bonus">Bonus:</p>
+                    <p class="nom">Nom:</p>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button><a href="selectTeam">Select</a></button>
+                <button><a href="deleteTeam">Delete</a></button>
+                <button><a href="modifyTeam">Modify</a></button>
+            </div>
+
+            <div class="container">
+                <div class="box">
+                    <img th:src="@{/champions/rakan.jpg}" alt="Rakan">
+                    <div class="arrow left-arrow previous-champ">
+                        <div class="arrow-top-l"></div>
+                        <div class="arrow-bottom-l"></div>
+                    </div>
+                    <div class="arrow right-arrow next-champ">
+                        <div class="arrow-top-r"></div>
+                        <div class="arrow-bottom-r"></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <img th:src="@{/weapon/item1.png}" alt="Item1">
+                    <div class="arrow left-arrow previous-item">
+                        <div class="arrow-top-l"></div>
+                        <div class="arrow-bottom-l"></div>
+                    </div>
+                    <div class="arrow right-arrow next-item">
+                        <div class="arrow-top-r"></div>
+                        <div class="arrow-bottom-r"></div>
+                    </div>
+                </div>
+                <div class="bonus-container">
+                    <p class="bonus">Bonus:</p>
+                    <p class="nom">Nom:</p>
+                </div>
+            </div>
+
+
+            <div class="buttons">
+                <button><a href="selectTeam">Select</a></button>
+                <button><a href="deleteTeam">Delete</a></button>
+                <button><a href="modifyTeam">Modify</a></button>
+            </div>
+
         </div>
 
-        <!-- Weapon div -->
-        <div class="box">
-            <span class="arrow left-arrow">&lt;</span>
-            <span class="arrow right-arrow">&gt;</span>
-            <h3>Weapon Name</h3>
-            <img src="path_to_weapon_image.jpg" alt="Weapon Image">
-        </div>
     </div>
 
-    <!-- Buttons below the divs -->
-    <div class="buttons">
-        <button>Select</button>
-        <button>Delete</button>
-        <button>Modify</button>
-    </div>
 </div>
+
+<div th:replace="Component/SideBar :: sideBar"></div>
+
 </body>
 </html>
-
-
-
