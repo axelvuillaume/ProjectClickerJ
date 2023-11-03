@@ -4,9 +4,9 @@
     <title>weaponCard</title>
 </head>
 <body>
-<div th:fragment="weaponCard(image, nom, description, price, level, bonus, id, owned)">
+<div th:fragment="weaponCard(image, nom, description, price, level, bonus, id, owned, showButton)">
 
-    <div th:replace="Component/Card :: card(${image}, ${nom}, ${description + '\n' + 'click bonus : ' + bonus}, ${owned ? 'possessed' : ( level <= player.xp / 50 ? 'buy for ' + price + ' Gold' : 'unlocked at level ' + level) }, 'buyWeaponButton-' + ${id}, ${owned})"></div>
+    <div th:replace="Component/Card :: card(${image}, ${nom}, ${description + '\n' + 'click bonus : ' + bonus}, ${owned ? 'possessed' : ( level <= player.xp / 50 ? 'buy for ' + price + ' Gold' : 'unlocked at level ' + level) }, 'buyWeaponButton-' + ${id}, ${owned}, ${showButton})"></div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const buyButton = document.getElementById('buyWeaponButton-' + [[${id}]]);

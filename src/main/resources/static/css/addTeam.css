@@ -4,6 +4,12 @@
     text-align: center;
 }
 
+.cardSelector {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 .main-body-template .right-section .content-wrapper .form label{
     color: #D7B573;
     font-size: 25px ;
