@@ -17,12 +17,14 @@
         <div th:if="${player != null}" th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
         <div class="content-wrapper"></div>
 
-        <a href="/game">
+
         <div class="boutonPlay">
+            <a href="/game">
             <span class="PlayText">PLAY</span>
-            <img th:src="@{/image0_1.gif}" alt="Description du GIF">
+            <img th:src="@{/bountonplaygif.gif}" alt="Description du GIF">
+            </a>
         </div>
-        </a>
+
     </div>
 
 
