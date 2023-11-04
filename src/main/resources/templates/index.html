@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ProjectClickerJ</title>
     <link rel="stylesheet" th:href="@{/css/sideBar.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
 
@@ -14,8 +14,13 @@
     </video>
 
     <div class="right-section">
+        <div class="luminous-text">
+            ProjetClickerJ
+        </div>
         <div th:if="${player != null}" th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
-        <div class="content-wrapper"></div>
+        <div class="content-wrapper">
+
+        </div>
 
 
         <div class="boutonPlay">
