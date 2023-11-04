@@ -41,17 +41,16 @@
     }
 
     function resetProgressBar() {
-        console.log("okok")
         clearTimeout(timerId); // Stops the timer
         progressBar.value = 0; // Resets the progress bar to 0
-        updateProgressBar(0);  // Start the timer again
+        if (pseudoInput.value !== "") {
+            updateProgressBar(0);  // Start the timer again
+        }
     }
 
     pseudoInput.addEventListener("input", function() {
         resetProgressBar();
     });
-
-    updateProgressBar(0);
 </script>
 
 

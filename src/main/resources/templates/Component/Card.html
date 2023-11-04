@@ -8,7 +8,7 @@
         <img  th:src="@{${imageUrl}}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title" th:text="${nom}"></h5>
-            <p class="card-text" th:description="${description}"></p>
+            <p class="card-text" th:utext="${description}"></p>
             <a href="#" class="btn btn-primary" th:id="${buttonID}" th:if="${!owned && showButton}">[[${buttonText}]]</a>
             <div class="btn btn-primary" th:if="${owned && showButton}">[[${buttonText}]]</div>
         </div>
