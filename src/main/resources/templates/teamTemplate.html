@@ -7,7 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/teamTemplate.css}">
     <link rel="stylesheet" th:href="@{/css/sideBar.css}">
-
 </head>
 <body>
 <div class="main-body-template">
@@ -15,53 +14,59 @@
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
     </video>
     <div class="right-section">
-        <div class="content-wrapper">
-            <div class="container">
-                <div class="box">
-                    <img th:src="@{/champions/rakan.jpg}" alt="Rakan">
-                    <div class="arrow left-arrow" id="previous-champion">
-                        <div class="arrow-top-l"></div>
-                        <div class="arrow-bottom-l"></div>
-                    </div>
-                    <div class="arrow right-arrow" id="next-champion">
-                        <div class="arrow-top-r"></div>
-                        <div class="arrow-bottom-r"></div>
-                    </div>
-                </div>
-                <div class="box">
-                    <img th:src="@{/weapon/item1.png}" alt="Item1">
-                    <div class="arrow left-arrow" id="previous-weapon" >
-                        <div class="arrow-top-l"></div>
-                        <div class="arrow-bottom-l"></div>
-                    </div>
-                    <SCRIPT>
-                        document.getElementById('next-champion').addEventListener('click',function(){
-                            
-                        });
-                    </SCRIPT>
-                    <div class="arrow right-arrow" id="next-weapon">
-                        <div class="arrow-top-r"></div>
-                        <div class="arrow-bottom-r"></div>
-                    </div>
-                </div>
+        <div class="content-wrapper" id="player-wrapper">
+            <div th:each="team : ${teamsOwned}">
+                <div th:replace="Component/Team :: team(${team})"></div>
             </div>
-
-            <div class="buttons">
-                <button><a href="selectTeam">Select</a></button>
-                <button><a href="deleteTeam">Delete</a></button>
-                <button><a href="modifyTeam">Modify</a></button>
-            </div>
-
         </div>
 
     </div>
 
-</div>
-
 <div th:replace="Component/SideBar :: sideBar"></div>
+    <script>
+        function select(e, id) {
+            e.preventDefault();
+            try {
+                const fetchSelect = async (id) => {
+                    const response = await fetch('selectTeam', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({teamId: id})
+                    })
+                    if (response.ok) {
+                        location.reload()
+                    }
+                }
+                fetchSelect(id)
+            } catch (err) {
+                console.log("error" + err);
+            }
+        }
 
+        function deleteTeam(e, id) {
+            e.preventDefault();
+            console.log(id)
+            try {
+                const fetchDelete = async (id) => {
+                    const response = await fetch('deleteTeam', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({teamId: id})
+                    })
+                    if (response.ok) {
+                        location.reload()
+                    }
+                }
+                fetchDelete(id)
+            } catch (err) {
+                console.log("error" + err);
+            }
+        }
+    </script>
+</div>
 </body>
 </html>
-
-
-

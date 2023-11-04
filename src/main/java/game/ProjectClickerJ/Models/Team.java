@@ -3,6 +3,7 @@ package game.ProjectClickerJ.Models;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+
 @Getter
 @Entity
 public class Team {

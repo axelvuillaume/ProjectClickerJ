@@ -87,7 +87,7 @@
 
 <div class="selectTeam" th:if="${player.getSelectedTeam() != null}">
     <img th:src="${player.getSelectedTeam().getChampion().getImage()}"/>
-    <img th:src="${player.getSelectedTeam().getChampion().getImage()}"/>
+    <img th:src="${player.getSelectedTeam().getWeapon().getImage()}"/>
     <p th:text="'Bonus : ' + ${player.getSelectedTeam().getChampion().getBonus() + player.getSelectedTeam().getWeapon().getBonus()}"></p>
 </div>
 
