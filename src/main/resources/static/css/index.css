@@ -12,12 +12,12 @@ body {
     font-family: 'Hogwarts';
     font-weight: 900;
     color: #C5EAF1;
-    font-size: 85px;
+    font-size: 90px;
     text-align: center;
     padding: 50px 0;
     position: absolute;
     width: 70%;
-    margin-left: 15%;
+    margin-left: 18%;
     margin-top: -30px;
     text-shadow:
             0 0 10px #D7B573, /* Glowing effect */
@@ -246,9 +246,8 @@ video {
 
 .boutonPlay img:hover {
     filter: blur(5px);
-
+}
 @font-face {
     font-family: "Hogwarts";
     src: url("../Hogwarts.ttf");
-
 }
