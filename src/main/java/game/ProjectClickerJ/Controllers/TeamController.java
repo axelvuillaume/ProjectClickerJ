@@ -11,6 +11,8 @@ import game.ProjectClickerJ.ObjectRepositories.TeamRepository;
 import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import game.ProjectClickerJ.Utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -64,11 +67,37 @@ public class TeamController {
 
     }
 
+    @GetMapping("/teamTemplate")
+    public String getTeamTemplatePage(Model model, HttpSession session) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "redirect:/connexion";
+        }
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            throw new RuntimeException("player not found");
+        }
+        Player playerInstance = player.get();
+
+        List<Champion> championsOwned = player.get().getInventoryChampion();
+        List<Weapon> weaponsOwned = player.get().getInventoryWeapon();
+
+        model.addAttribute("championsOwned", championsOwned);
+        model.addAttribute("weaponsOwned", weaponsOwned);
+        model.addAttribute("player", playerInstance);
+
+        listTeams(model, session);
+        return "teamTemplate";
+    }
+
 
     @GetMapping("/addTeam")
     public String listOwnedWeaponsChampions(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         Long currentPlayerId = (Long) session.getAttribute("player");
 
@@ -160,31 +189,34 @@ public class TeamController {
 
 
     @PostMapping("/selectTeam")
-    public String selectTeam(Long teamId, HttpSession session) {
+    @ResponseBody
+    public ResponseEntity<?> selectTeam(@RequestBody Map<String, Long> payload, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in.");
         }
+
+        Long teamId = payload.get("teamId");
 
         Long currentPlayerId = (Long) session.getAttribute("player");
 
         Optional<Player> player = playerRepo.findById(currentPlayerId);
         if (player.isEmpty()) {
             System.out.println("player not found");
-            throw new RuntimeException("player not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Player not found");
         } else {
             Player playerInstance = player.get();
 
             Optional<Team> team = teamRepo.findById(teamId);
             if (team.isEmpty()) {
                 System.out.println("team not found");
-                throw new RuntimeException("team not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Team not found");
             }
 
             playerInstance.setSelectedTeam(team.get());
             playerRepo.save(playerInstance);
-        }
 
-        return "redirect:/selectTeam";
+            return ResponseEntity.ok("Team selected successfully");
+        }
     }
 
 
@@ -258,40 +290,34 @@ public class TeamController {
         return "deleteTeam";
     }
 
-    @DeleteMapping("deleteTeam")
-    public String deleteTeam(Long teamId, HttpSession session) {
+    @DeleteMapping("/deleteTeam")
+    @ResponseBody
+    public ResponseEntity<?> deleteTeam(@RequestBody Map<String, Long> payload, HttpSession session) {
+        System.out.println("okkkkkkkkkkkkkkkkk");
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in.");
         }
 
-        Long currentPlayerId = (Long) session.getAttribute("player");
+        Long teamId = payload.get("teamId");
 
+        Long currentPlayerId = (Long) session.getAttribute("player");
         Optional<Player> player = playerRepo.findById(currentPlayerId);
         if (player.isEmpty()) {
-            System.out.println("player not found");
-            throw new RuntimeException("player not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Player not found");
         }
 
         Optional<Team> team = teamRepo.findById(teamId);
         if (team.isEmpty()) {
-            System.out.println("team not found");
-            throw new RuntimeException("team not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Team not found");
         }
 
         List<Team> inventoryTeams = player.get().getInventoryTeams();
-
-        List<Team> teamsToKeep = new ArrayList<>();
-        for (Team inventoryTeam : inventoryTeams) {
-            if (!inventoryTeam.equals(team.get())) {
-                teamsToKeep.add(inventoryTeam);
-            }
-        }
-
-        player.get().setInventoryTeams(teamsToKeep);
+        inventoryTeams.removeIf(t -> t.getId().equals(teamId));
+        player.get().setInventoryTeams(inventoryTeams);
 
         teamRepo.delete(team.get());
 
-        return "deleteTeam";
+        return ResponseEntity.ok("Team deleted successfully");
     }
 
 }

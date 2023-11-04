@@ -30,14 +30,6 @@ public class PageTemplateController {
         return "championTemplate";
     }
 
-    @GetMapping("/teamTemplate")
-    public String getTeamTemplatePage(Model model, HttpSession session) {
-        if (Utils.IsNotLogin(session,  playerRepository)) {
-            return "redirect:/connexion";
-        }
-        return "teamTemplate";
-    }
-
 
 }
 
