@@ -183,26 +183,28 @@ video {
 }
 
 .boutonPlay {
-    width: 200px;
+    width: 15vw;
     height: fit-content;
-    border: solid 2px #D7B573;
-    margin-bottom: 10px;
-
-    background: linear-gradient(121deg,
-    #007bff 0%,
-    #8ab7e3 39%,
-    rgb(12 0 176) 93%);
+    left: 80%;
+    bottom: 5%;
+    background: linear-gradient(121deg, #007bff 0%, #8ab7e3 39%,  rgb(12 0 176) 93%);
     background-size: 300% 300%;
     animation: gradient-animation 10s ease infinite;
     display: inline-block;
     position: relative;
-    left: 60%;
+    overflow: hidden;
+    border-radius: 20px;
+    border: solid 2px transparent;
+    transition: border 0.3s;
+    box-sizing: border-box;
+    z-index: 8;
 
 }
 
 .boutonPlay img {
     width: 100%;
     height: 100%;
+    transition: filter 0.15s;
 }
 
 .boutonPlay .PlayText {
@@ -213,7 +215,16 @@ video {
     transform: translate(-50%, -50%);
     color: #D7B573;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 2.5vw;
     cursor: pointer;
+}
 
+
+.boutonPlay:hover {
+    border: solid 2px #D7B573;
+
+}
+
+.boutonPlay img:hover {
+    filter: blur(5px);
 }
