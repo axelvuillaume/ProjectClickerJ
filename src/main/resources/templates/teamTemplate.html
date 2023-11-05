@@ -14,6 +14,11 @@
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
     </video>
     <div class="right-section">
+
+        <div class="addTeam">
+        <a href="/addTeam"><img th:src="@{/icon/TeamIconAdd.png}" alt="weaponShop"></a>
+        </div>
+
         <div class="content-wrapper" id="player-wrapper">
             <div th:each="team : ${teamsOwned}">
                 <div th:replace="Component/Team :: team(${team})"></div>

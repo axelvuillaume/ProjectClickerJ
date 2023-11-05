@@ -278,3 +278,15 @@ video {
 .research button img {
     max-width: 100%;
 }
+
+.addTeam{
+    position: absolute;
+    width: 7%;
+    margin: 2%;
+    z-index: 8;
+
+}
+
+.addTeam img{
+    max-width: 100%;
+}
