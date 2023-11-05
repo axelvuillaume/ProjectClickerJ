@@ -6,23 +6,19 @@ Bienvenue dans PROJECTCLICKERJ, un jeu de clicker amusant qui vous permet de gag
 
 ## Comment Jouer
 
-1. Clonez ou téléchargez ce dépôt sur votre ordinateur.
+Pour commencer à jouer, suivez ce lien : Lien vers le jeu
 
-2. Ouvrez le fichier `index.html` dans un navigateur web (Google Chrome recommandé).
+Au début de l'aventure, vous disposez d'armes de base qui rapportent peu d'argent par clic, mais c'est un bon début. Avec l'argent gagné, vous pouvez débloquer de nouveaux champions, armes de plus en plus puissantes et créer des équipes pour maximiser vos gains.
 
-3. Vous verrez un bouton "Cliquez ici !" à l'écran.
+Utilisez le menu pour naviguer entre le "Shop Weapon" (boutique d'armes), le "Shop Champion" (boutique de champions) et la "Composition Team" (création d'équipes) pour créer la team la plus puissante possible.
 
-4. Cliquez sur le bouton autant de fois que vous le souhaitez pour gagner des points.
-
-5. Votre score sera mis à jour en temps réel en haut de l'écran.
-
-6. Le jeu continue indéfiniment, alors voyez combien de points vous pouvez marquer !
 
 ## Fonctionnalités
 
-- Gagnez des points en cliquant sur le bouton.
+- Gagnez de l'argent et de l'expérience en cliquant sur l'écran.
 - Mises à jour en temps réel du score.
 - Pas de limite de temps, jouez autant que vous le souhaitez.
+- Personnalisez, créez et ajoutez des équipes à volonté pour optimiser votre stratégie.
 
 ## Contributions
 
