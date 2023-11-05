@@ -26,6 +26,7 @@ Utilisez le menu pour naviguer entre le "Weapon's Shop" (boutique d'armes), le "
 ### Conseil
 
 Activez l'accélération matérielle de votre navigateur pour une meilleure fluidité !
+De plus, nous utilisons un server render gratuit, donc votre progression est perdue lorsque le serveur se met en veille, ne vous arrêtez jamais de cliquer !
 
 ### Licence
 
