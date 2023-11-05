@@ -247,6 +247,7 @@ video {
 .boutonPlay img:hover {
     filter: blur(5px);
 }
+
 @font-face {
     font-family: "Hogwarts";
     src: url("../Hogwarts.ttf");

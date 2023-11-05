@@ -20,6 +20,13 @@
 
         <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
+        <form action="/shopWeapon/research" method="get" class="research">
+            <input type="text" name="research" placeholder="Rechercher une arme">
+            <button type="submit"><img th:src="@{/icon/iconSearch.png}"/> </button>
+
+        </form>
+
+
         <div class="content-wrapper">
             <div class="grid-container">
                 <div class="game-item" th:each="Champ : ${championsOwned}">
@@ -28,6 +35,8 @@
                 <div class="game-item" th:each="noChamp : ${championsNotOwned}">
                     <div class="game-image" th:replace="Component/championCard :: championCard(${noChamp.image}, ${noChamp.name}, ${noChamp.description}, ${noChamp.prix}, ${noChamp.xpUnlockable}, ${noChamp.bonus}, ${noChamp.id}, false, true)"></div>
                 </div>
+
+
             </div>
         </div>
     </div>
