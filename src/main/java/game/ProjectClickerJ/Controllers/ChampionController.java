@@ -3,6 +3,7 @@ package game.ProjectClickerJ.Controllers;
 
 import game.ProjectClickerJ.Models.Champion;
 import game.ProjectClickerJ.Models.Player;
+import game.ProjectClickerJ.Models.Weapon;
 import game.ProjectClickerJ.ObjectRepositories.ChampionRepository;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
 import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
@@ -14,10 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -111,6 +109,36 @@ public class ChampionController {
         }
 
         return new ResponseEntity<>(Map.of("status", "success", "message", "Champion purchased successfully"), HttpStatus.OK);
+    }
+
+    @GetMapping("/shopChampion/research")
+    public String researchWeapons(Model model, HttpSession session, @RequestParam("research") String research) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "connexion";
+        }
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+
+        if (player.isEmpty()) {
+            System.out.println("Player not found");
+            throw new RuntimeException("Player not found");
+        }
+
+        Player playerInstance = player.get();
+        Champion searchResult = championRepo.findByName(research);
+
+        List<Champion> champion = playerInstance.getInventoryChampion();
+
+        if (champion.contains(searchResult) ){
+            model.addAttribute("championsOwned", searchResult);
+
+        } else  {
+            model.addAttribute("championsNotOwned", searchResult);
+        }
+        model.addAttribute("player", playerInstance);
+
+        return "championTemplate";
     }
 
     /*@PostMapping("/shopChampion")

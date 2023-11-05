@@ -228,3 +228,28 @@ video {
 .boutonPlay img:hover {
     filter: blur(5px);
 }
+
+
+.research input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background : transparent;
+    border-bottom: solid 1px white;
+    margin-right: 3%;
+    margin-left: 3%;
+
+    color: #D7B573;
+}
+
+.research button {
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    width: 60px;
+
+}
+
+.research button img{
+    max-width : 100%;
+}
