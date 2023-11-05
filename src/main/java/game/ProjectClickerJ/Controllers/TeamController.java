@@ -27,6 +27,7 @@ import java.util.Optional;
 public class TeamController {
 
     private Boolean teamExist = false;
+    private Boolean teamModifyExist = false;
 
     @Autowired
     TeamRepository teamRepo;
@@ -147,33 +148,28 @@ public class TeamController {
             }
 
             //Verif team existe deja
-
             List<Team> playerTeams = playerInstance.getInventoryTeams();
             for (Team team : playerTeams) {
                 if ((team.getWeapon().getId().equals(weaponId) && team.getChampion().getId().equals(championId) )|| team.getName().equals(name)) {
-                    System.out.println("team ou pseudo existe deja");
                     teamExist = true;
                 }
             }
-
 
             if (!teamExist) {
                 Team team = new Team();
                 team.setName(name);
                 team.setChampion(champion.get());
                 team.setWeapon(weapon.get());
-
                 teamRepo.save(team);
-
 
                 playerTeams.add(team);
                 playerInstance.setInventoryTeams(playerTeams);
                 playerRepo.save(playerInstance);
 
-
+            }else {
+                System.out.println("team ou pseudo existe deja");
             }
         }
-
         return "redirect:/teamTemplate";
 
     }
@@ -233,7 +229,7 @@ public class TeamController {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
         }
-
+        Player playerInstance = player.get();
         List<Team> teamsOwned = player.get().getInventoryTeams();
         model.addAttribute("teamsOwned", teamsOwned);
 
@@ -244,41 +240,69 @@ public class TeamController {
 
         model.addAttribute("championsOwned", championsOwned);
         model.addAttribute("weaponsOwned", weaponsOwned);
+        model.addAttribute("player", playerInstance);
 
+        
         return "modifyTeam";
     }
 
     @PatchMapping("modifyTeam")
-    public String modifyTeam(Long championId, Long weaponId, Long teamId, HttpSession session) {
-        if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
-        }
+    public ResponseEntity<Map<String, String>>  modifyTeam(Long championId, Long weaponId, Long teamId, HttpSession session, String name) {
+
+        teamModifyExist = false;
 
         Optional<Weapon> weapon = weaponRepo.findById(weaponId);
         if (weapon.isEmpty()) {
             System.out.println("weapon not found");
-            throw new RuntimeException("weapon not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "weapon not found"), HttpStatus.BAD_REQUEST);
+
         }
 
         Optional<Champion> champion = championRepo.findById(championId);
         if (champion.isEmpty()) {
             System.out.println("champion not found");
-            throw new RuntimeException("champion not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "champion not found"), HttpStatus.BAD_REQUEST);
+
         }
 
         Optional<Team> team = teamRepo.findById(teamId);
         if (team.isEmpty()) {
             System.out.println("team not found");
-            throw new RuntimeException("team not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "team not found"), HttpStatus.BAD_REQUEST);
+
         }
 
-        team.get().setChampion(champion.get());
-        team.get().setWeapon(weapon.get());
 
-        teamRepo.save(team.get());
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+
+        if (player.isEmpty()) {
+            System.out.println("player not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "player not found"), HttpStatus.BAD_REQUEST);
+
+        } else {
+
+            Player playerInstance = player.get();
 
 
-        return "redirect:/modifyTeam";
+            List<Team> playerTeams = playerInstance.getInventoryTeams();
+            for (Team teamM : playerTeams) {
+                if ((teamM.getWeapon().getId().equals(weaponId) && teamM.getChampion().getId().equals(championId) )|| teamM.getName().equals(name)) {
+                    teamModifyExist = true;
+                }
+            }
+
+            if (!teamModifyExist) {
+                team.get().setName(name);
+                team.get().setChampion(champion.get());
+                team.get().setWeapon(weapon.get());
+                teamRepo.save(team.get());
+            }else {
+                System.out.println("team ou pseudo existe deja");
+            }
+        }
+
+        return new ResponseEntity<>(Map.of("status", "success", "message", "Chamgement successfully"), HttpStatus.OK);
     }
 
     @GetMapping("deleteTeam")
