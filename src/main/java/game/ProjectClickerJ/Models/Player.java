@@ -3,6 +3,7 @@ package game.ProjectClickerJ.Models;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -49,8 +50,18 @@ public class Player {
         InventoryWeapon = inventoryWeapon;
     }
 
+    public void setInventoryWeapon(Weapon Weapon) {
+        InventoryWeapon = new ArrayList<Weapon>();
+        InventoryWeapon.add(Weapon);
+    }
+
     public void setInventoryChampion(List<Champion> inventoryChampion) {
         InventoryChampion = inventoryChampion;
+    }
+
+    public void setInventoryChampion(Champion Champion) {
+        InventoryChampion = new ArrayList<Champion>();
+        InventoryChampion.add(Champion);
     }
 
     public void setSelectedTeam(Team selectedTeam) {
@@ -59,6 +70,11 @@ public class Player {
 
     public void setInventoryTeams(List<Team> inventoryTeams) {
         InventoryTeams = inventoryTeams;
+    }
+
+    public void setInventoryTeams(Team Team) {
+        InventoryTeams = new ArrayList<Team>();
+        InventoryTeams.add(Team);
     }
 
     public void setProfileImage(String profileImage) {

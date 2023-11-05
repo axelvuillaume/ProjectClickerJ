@@ -33,7 +33,7 @@ public class PageController {
     @GetMapping("/game")
     public String getGamePage(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepository)) {
-            return "game"; // change back to connexion
+            return "redirect:/connexion";
         }
         GetPlayer(model, session);
         return "game";

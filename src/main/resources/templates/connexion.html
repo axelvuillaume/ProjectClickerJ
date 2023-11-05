@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>connexion</title>
     <link rel="stylesheet" th:href="@{/css/connexion.css}">
 </head>
 <body>
 <video autoplay loop muted playsinline poster="">
     <source th:src="@{/wallpaperConnexion.mp4}" type="video/mp4">
 </video>
-
+<div id="lgin">
+    Log In
+</div>
 <form id="loginForm" action="login" method="POST">
     <input type="text" name="pseudo" id="pseudoLabel" placeholder="Pseudo" class="pseudo">
 </form>

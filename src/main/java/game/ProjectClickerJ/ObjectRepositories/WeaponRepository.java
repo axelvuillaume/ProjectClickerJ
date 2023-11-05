@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface WeaponRepository extends JpaRepository<Weapon, Long> {
+    Weapon findByName(String keyword);
 
 }

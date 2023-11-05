@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ProjectClickerJ</title>
     <link rel="stylesheet" th:href="@{/css/sideBar.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
 
@@ -14,15 +14,22 @@
     </video>
 
     <div class="right-section">
-        <div th:if="${player != null}" th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
-        <div class="content-wrapper"></div>
-
-        <a href="/game">
-        <div class="boutonPlay">
-            <span class="PlayText">PLAY</span>
-            <img th:src="@{/image0_1.gif}" alt="Description du GIF">
+        <div class="luminous-text">
+            ProjetClickerJ
         </div>
-        </a>
+        <div th:if="${player != null}" th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
+        <div class="content-wrapper">
+
+        </div>
+
+
+        <div class="boutonPlay">
+            <a href="/game">
+            <span class="PlayText">PLAY</span>
+            <img th:src="@{/bountonplaygif.gif}" alt="Description du GIF">
+            </a>
+        </div>
+
     </div>
 
 
