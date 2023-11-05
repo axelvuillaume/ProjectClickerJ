@@ -10,7 +10,7 @@ Pour commencer à jouer, suivez ce lien : Lien vers le jeu
 
 Au début de l'aventure, vous disposez d'armes de base qui rapportent peu d'argent par clic, mais c'est un bon début. Avec l'argent gagné, vous pouvez débloquer de nouveaux champions, armes de plus en plus puissantes et créer des équipes pour maximiser vos gains.
 
-Utilisez le menu pour naviguer entre le "Shop Weapon" (boutique d'armes), le "Shop Champion" (boutique de champions) et la "Composition Team" (création d'équipes) pour créer la team la plus puissante possible.
+Utilisez le menu pour naviguer entre le "Weapon's Shop" (boutique d'armes), le "Champion's Shop" (boutique de champions) et la "Team's Composition" (création d'équipes) pour créer la team la plus puissante possible.
 
 
 ## Fonctionnalités
