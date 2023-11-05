@@ -174,7 +174,7 @@ public class TeamController {
             }
         }
 
-        return "redirect:/addTeam";
+        return "redirect:/teamTemplate";
 
     }
 
