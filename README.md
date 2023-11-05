@@ -28,3 +28,6 @@ Utilisez le menu pour naviguer entre le "Weapon's Shop" (boutique d'armes), le "
 
 Ce projet est destiné à un usage strictement éducatif dans le cadre du cours de JEE à cy-tech sous la supervision de Remy Brousset. Tous les droits sont réservés par les auteurs du projet, et aucune distribution en dehors de cet environnement n'est autorisée.
 
+# Conseil
+
+Activez l'accélération matérielle de votre navigateur pour une meilleure fluidité !
