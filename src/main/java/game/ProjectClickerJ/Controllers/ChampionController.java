@@ -51,7 +51,7 @@ public class ChampionController {
     public String listChamps(Model model, HttpSession session) {
 
         if (Utils.IsNotLogin(session,  playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
 
         List<Champion> championsNotOwned = championRepo.findAll();
@@ -114,7 +114,7 @@ public class ChampionController {
     @GetMapping("/shopChampion/research")
     public String researchWeapons(Model model, HttpSession session, @RequestParam("research") String research) {
         if (Utils.IsNotLogin(session,  playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
 
         Long currentPlayerId = (Long) session.getAttribute("player");

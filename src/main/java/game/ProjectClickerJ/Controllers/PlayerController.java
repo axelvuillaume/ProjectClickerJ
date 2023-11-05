@@ -85,7 +85,7 @@ public class PlayerController {
     @GetMapping("settings")
     public String Getsettings(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         GetPlayer(model, session);
         return "settings";
@@ -157,7 +157,7 @@ public class PlayerController {
     @GetMapping("testAddGold")
     public String GetTestAddGold(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         GetPlayer(model, session);
         return "testAddGold";
