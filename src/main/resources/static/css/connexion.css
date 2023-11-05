@@ -19,15 +19,6 @@ body {
     font-family: Hogwarts;
     color: white;
     font-size: 110px;
-
-    /*gradation*/
-    text-shadow:
-            0 0 10px #DCFFFF,
-            0 0 20px #DCFFFF,
-            2px 2px 0px #aaa,
-            3px 3px 0px #999,
-            4px 4px 0px #888;
-    transform: translateZ(20px);
 }
 
 input {
