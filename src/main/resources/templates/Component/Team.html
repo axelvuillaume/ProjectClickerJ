@@ -7,26 +7,12 @@
         <div class="container">
             <div class="box">
                 <img th:src="@{${team.champion.Image}}" alt="Rakan">
-                <div class="arrow left-arrow previous-champ">
-                    <div class="arrow-top-l"></div>
-                    <div class="arrow-bottom-l"></div>
-                </div>
-                <div class="arrow right-arrow next-champ">
-                    <div class="arrow-top-r"></div>
-                    <div class="arrow-bottom-r"></div>
-                </div>
+                
             </div>
 
             <div class="box">
                 <img th:src="@{${team.weapon.Image}}" alt="Item1">
-                <div class="arrow left-arrow previous-item">
-                    <div class="arrow-top-l"></div>
-                    <div class="arrow-bottom-l"></div>
-                </div>
-                <div class="arrow right-arrow next-item">
-                    <div class="arrow-top-r"></div>
-                    <div class="arrow-bottom-r"></div>
-                </div>
+
             </div>
             <div class="bonus-container">
                 <p class="bonus" th:text="'Bonus: ' + ${team.champion.bonus + team.weapon.bonus}"></p>
