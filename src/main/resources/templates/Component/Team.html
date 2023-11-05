@@ -15,10 +15,9 @@
             </div>
             <div class="bonus-container">
                 <p class="bonus" th:text="'Bonus: ' + ${team.champion.bonus + team.weapon.bonus}"></p>
-                <p class="nom" th:text="'Nom: ' + ${team.name}"></p>
+                <p class="nom" th:text="'Name: ' + ${team.name}"></p>
             </div>
         </div>
-
         <div class="buttons">
             <button th:onclick="|select(event, '${team.id}')|"><a href="#">Select</a></button>
             <button th:onclick="|deleteTeam(event, '${team.id}')|"><a href="#" >Delete</a></button>
