@@ -14,7 +14,6 @@ video{
     position: relative;
     flex-grow: 1;
 
-    height: calc(110vh - 61vh);
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
 
@@ -52,16 +51,15 @@ video{
     justify-content: space-between;
     padding: 20px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-    height: calc(100vh - 50vh); /* make each grid item the height of the viewport minus padding */
+    height: auto;
     scroll-snap-align: start;
 }
-
-
 
 .game-image {
     max-width: 80%;
     margin-bottom: 20px;
 }
+
 .game-item button {
     margin-top: 10px;
     padding: 10px 20px;
