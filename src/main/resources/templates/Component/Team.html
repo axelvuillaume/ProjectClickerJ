@@ -6,11 +6,13 @@
     <div class="team" th:fragment="team(team)">
         <div class="container">
             <div class="box">
-                <img th:src="@{${team.champion.Image}}" alt="Rakan">
+                <img th:src="@{${team.champion.Image}}" alt="">
+                <p th:text="${team.champion.name}" style="color:#D7B573"> </p>
             </div>
 
             <div class="box">
-                <img th:src="@{${team.weapon.Image}}" alt="Item1">
+                <img th:src="@{${team.weapon.Image}}" alt="">
+                <p th:text="${team.weapon.name}" style="color:#D7B573"> </p>
 
             </div>
             <div class="bonus-container">
