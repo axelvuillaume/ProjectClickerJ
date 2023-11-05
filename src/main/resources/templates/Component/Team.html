@@ -3,7 +3,7 @@
     <title>team</title>
 </head>
 <body>
-    <div class="team" th:fragment="team(team)">
+    <div class="team" th:fragment="team(team, player)">
         <div class="container">
             <div class="box">
                 <img th:src="@{${team.champion.Image}}" alt="">
@@ -22,7 +22,7 @@
         </div>
         <div class="buttons">
             <button th:onclick="|select(event, '${team.id}')|"><a href="#">Select</a></button>
-            <button th:onclick="|deleteTeam(event, '${team.id}')|"><a href="#" >Delete</a></button>
+            <button th:if="${player.selectedTeam} != ${team}" th:onclick="|deleteTeam(event, '${team.id}')|"><a href="#" >Delete</a></button>
             <a href="modifyTeam"><button>Modify</button></a>
         </div>
     </div>

@@ -25,7 +25,7 @@
 
         <div class="content-wrapper" id="player-wrapper">
             <div th:each="team : ${teamsOwned}">
-                <div th:replace="Component/Team :: team(${team})"></div>
+                <div th:replace="Component/Team :: team(${team}, ${player})"></div>
             </div>
         </div>
 
