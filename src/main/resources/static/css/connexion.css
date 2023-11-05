@@ -13,6 +13,22 @@ body {
     text-align: center;
     top: 50%;
 }
+#lgin{
+    margin-top: -15%;
+    margin-bottom: 0.7em;
+    font-family: Hogwarts;
+    color: white;
+    font-size: 110px;
+
+    /*gradation*/
+    text-shadow:
+            0 0 10px #DCFFFF,
+            0 0 20px #DCFFFF,
+            2px 2px 0px #aaa,
+            3px 3px 0px #999,
+            4px 4px 0px #888;
+    transform: translateZ(20px);
+}
 
 input {
     color: #fff;
@@ -33,4 +49,9 @@ video {
     border: none;
     border-bottom: solid white;
 
+}
+
+@font-face {
+    font-family: "Hogwarts";
+    src: url("../Hogwarts.ttf");
 }
