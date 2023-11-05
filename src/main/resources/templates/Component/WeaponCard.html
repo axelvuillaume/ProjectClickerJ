@@ -15,7 +15,7 @@
                 buyButton.addEventListener('click', function (event) {
                     event.preventDefault();
                     try {
-                        fetch('shopWeapon', {
+                        fetch('/shopWeapon', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

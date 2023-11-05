@@ -174,14 +174,14 @@ public class TeamController {
             }
         }
 
-        return "redirect:/addTeam";
+        return "redirect:/teamTemplate";
 
     }
 
     @GetMapping("selectTeam")
     public String GetTeams(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         listTeams(model, session);
         return "selectTeam";
@@ -223,7 +223,7 @@ public class TeamController {
     @GetMapping("modifyTeam")
     public String listTeams2(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
 
         Long currentPlayerId = (Long) session.getAttribute("player");
@@ -284,7 +284,7 @@ public class TeamController {
     @GetMapping("deleteTeam")
     public String GetTeamsDelete(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         listTeams(model, session);
         return "deleteTeam";

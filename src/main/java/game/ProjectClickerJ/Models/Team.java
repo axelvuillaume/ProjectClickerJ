@@ -20,6 +20,16 @@ public class Team {
 
     private String name;
 
+    public Team(Champion championDefault, Weapon weaponDefault, String name) {
+        this.setWeapon(weaponDefault);
+        this.setChampion(championDefault);
+        this.setName(name);
+    }
+
+    public Team() {
+
+    }
+
 
     public void setName(String name) {
         this.name = name;

@@ -13,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +31,7 @@ public class WeaponController {
     @GetMapping("/shopWeapon")
     public String listWeapons(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         List<Weapon> weaponsNotOwned = weaponRepo.findAll();
 
@@ -62,7 +59,6 @@ public class WeaponController {
     @ResponseBody
     @Transactional
     public ResponseEntity<Map<String, String>> buyWeapon(HttpSession session, @RequestBody Map<String, Long> payload) {
-
         Long currentPlayerId = (Long) session.getAttribute("player");
         Long weaponId = payload.get("weaponId");
 
@@ -92,6 +88,38 @@ public class WeaponController {
 
         return new ResponseEntity<>(Map.of("status", "success", "message", "Champion purchased successfully"), HttpStatus.OK);
     }
+
+
+    @GetMapping("/shopWeapon/research")
+    public String researchWeapons(Model model, HttpSession session, @RequestParam("research") String research) {
+        if (Utils.IsNotLogin(session,  playerRepo)) {
+            return "redirect:/connexion";
+        }
+
+        Long currentPlayerId = (Long) session.getAttribute("player");
+        Optional<Player> player = playerRepo.findById(currentPlayerId);
+
+        if (player.isEmpty()) {
+            System.out.println("Player not found");
+            throw new RuntimeException("Player not found");
+        }
+
+        Player playerInstance = player.get();
+        Weapon searchResult = weaponRepo.findByName(research);
+
+        List<Weapon> weapon = playerInstance.getInventoryWeapon();
+
+        if (weapon.contains(searchResult) ){
+            model.addAttribute("weaponsOwned", searchResult);
+
+        } else  {
+            model.addAttribute("weaponsNotOwned", searchResult);
+        }
+        model.addAttribute("player", playerInstance);
+
+        return "weaponTemplate";
+    }
+
 
     /*@PostMapping("/shopWeapon")
     @Transactional

@@ -1,8 +1,13 @@
 package game.ProjectClickerJ.Controllers;
 
+import game.ProjectClickerJ.Models.Champion;
 import game.ProjectClickerJ.Models.Player;
 import game.ProjectClickerJ.Models.Team;
+import game.ProjectClickerJ.Models.Weapon;
+import game.ProjectClickerJ.ObjectRepositories.ChampionRepository;
 import game.ProjectClickerJ.ObjectRepositories.PlayerRepository;
+import game.ProjectClickerJ.ObjectRepositories.TeamRepository;
+import game.ProjectClickerJ.ObjectRepositories.WeaponRepository;
 import game.ProjectClickerJ.Utils.Utils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +30,18 @@ public class PlayerController {
     @Autowired
     PlayerRepository playerRepo;
 
+    @Autowired
+    WeaponRepository weaponRepo;
+
+
+    @Autowired
+    ChampionRepository championRepo;
+
+
+    @Autowired
+    TeamRepository teamRepo;
+
+
     public void GetPlayer(Model model, HttpSession session) {
         Long currentPlayerId = (Long) session.getAttribute("player");
 
@@ -42,12 +59,23 @@ public class PlayerController {
     @PostMapping("/login")
     public String login(HttpSession session, String pseudo) {
         Player player = playerRepo.findByPseudo(pseudo);
+
         if (player == null) {
+            Weapon weaponDefault = weaponRepo.findByName("DefaultWeapon");
+            Champion championDefault = championRepo.findByName("DefaultChampion");
+
             player = new Player();
             player.setProfileImage("deaultPp.png");
             player.setPseudo(pseudo);
             player.setXp(0);
             player.setGold(0);
+            player.setInventoryWeapon(weaponDefault);
+            player.setInventoryChampion(championDefault);
+
+            Team defaultTeam = new Team(championDefault, weaponDefault, "DefaultTeam");
+            teamRepo.save(defaultTeam);
+
+            player.setInventoryTeams(defaultTeam);
             playerRepo.save(player);
         }
         session.setAttribute("player", player.getId());
@@ -57,7 +85,7 @@ public class PlayerController {
     @GetMapping("settings")
     public String Getsettings(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         GetPlayer(model, session);
         return "settings";
@@ -106,12 +134,12 @@ public class PlayerController {
             Team team = playerInstance.getSelectedTeam();
             int goldTotal = playerInstance.getGold();
 
-            if (team != null ){
+            if (team != null) {
                 int bonus = team.getChampion().getBonus() + team.getWeapon().getBonus();
                 System.out.println(bonus);
                 playerInstance.setGold(goldTotal + bonus);
 
-            }else{
+            } else {
                 playerInstance.setGold(goldTotal + 1);
                 System.out.println("1");
             }
@@ -129,7 +157,7 @@ public class PlayerController {
     @GetMapping("testAddGold")
     public String GetTestAddGold(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         GetPlayer(model, session);
         return "testAddGold";
