@@ -17,7 +17,7 @@
 }
 
 .main-body-template .right-section .content-wrapper .form > *{
-    margin-bottom: 5%;
+    margin-bottom: 1%;
 }
 
 
@@ -41,4 +41,11 @@
 .main-body-template .right-section .content-wrapper .form .contentTeam{
     display:flex;
     justify-content: space-around;
+}
+
+
+
+.selectTeam{
+    width: 15%;
+    margin: auto;
 }

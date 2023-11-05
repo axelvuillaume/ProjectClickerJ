@@ -1,33 +1,116 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>modifyTeam</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/globalPage.css}">
+    <link rel="stylesheet" th:href="@{/css/sideBar.css}">
+    <link rel="stylesheet" th:href="@{/css/addTeam.css}">
+    <link rel="stylesheet" th:href="@{/css/topUserInfo.css}">
+
 </head>
 <body>
-<form id="modifyTeamForm" method="POST">
-    <select  name="teamId" >
-        <option th:each="team : ${teamsOwned}" th:value="${team.id}">
-            <span th:text="${team.name}"></span>
-        </option>
-    </select>
 
-    <select id="weaponSelected" name="championId">
-        <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
-            <span th:text="${champ.name}"></span>
-        </option>
-    </select>
+<div class="main-body-template">
+    <video autoplay loop muted playsinline poster="">
+        <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
+    </video>
 
-    <select  id="championSelected" name="weaponId">
-        <option th:each="weap : ${weaponsOwned}" th:value="${weap.id}">
-            <span th:text="${weap.name}"></span>
-        </option>
-    </select>
+    <div class="right-section">
 
-    <button type="submit">modifyTeam</button>
-</form>
+        <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
+
+        <div class="content-wrapper">
+            <form id="modifyTeamForm" method="POST" class="form">
+
+                <label> Select Team to modify</label>
+                <select  name="teamId"  class="selectTeam" >
+                    <option th:each="team : ${teamsOwned}" th:value="${team.id}">
+                        <span th:text="${team.name}"></span>
+                    </option>
+                </select>
+
+                <label for="name">Name :</label>
+                <input id="name" name="name" required >
+
+                <div class="contentTeam">
+                    <div class="cardSelector">
+                        <select id="championSelected" name="championId">
+                            <option th:each="champ : ${championsOwned}" th:value="${champ.id}">
+                                <span th:text="${champ.name}"></span>
+                            </option>
+                        </select>
+                        <div class="game-item champ" th:each="Champ : ${championsOwned}" th:attr="data-id=${Champ.id}">
+                            <div class="game-image"  th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.prix}, ${Champ.xpUnlockable}, ${Champ.bonus}, ${Champ.id}, true, false)"></div>
+                        </div>
+                    </div>
+                    <div class="cardSelector">
+                        <select id="weaponSelected" name="weaponId">
+                            <option th:each="Weap : ${weaponsOwned}" th:value="${Weap.id}">
+                                <span th:text="${Weap.name}"></span>
+                            </option>
+                        </select>
+                        <div class="game-item weapon" th:each="Weap : ${weaponsOwned}" th:attr="data-id=${Weap.id}">
+                            <div class="game-image"  th:replace="Component/weaponCard :: weaponCard(${Weap.image}, ${Weap.name}, ${Weap.description}, ${Weap.prix}, ${Weap.xpUnlockable}, ${Weap.bonus}, ${Weap.id}, true, false)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success button" >Modifier</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="Component/SideBar :: sideBar"></div>
 
 <script>
+    const champSelect = document.getElementById('championSelected');
+    const weaponSelect = document.getElementById('weaponSelected');
+
+    let currentChamp = champSelect.value;
+    let currentWeapon = weaponSelect.value;
+
+    function hideUnselected() {
+        // Hide champions
+        const allChamps = document.querySelectorAll('.game-item.champ');
+        allChamps.forEach(champ => {
+            if (champ.getAttribute('data-id') !== currentChamp) {
+                champ.style.display = 'none';
+            } else {
+                champ.style.display = 'block';
+            }
+        });
+
+        // Hide weapons
+        const allWeapons = document.querySelectorAll('.game-item.weapon');
+        allWeapons.forEach(weapon => {
+            if (weapon.getAttribute('data-id') !== currentWeapon) {
+                weapon.style.display = 'none';
+            } else {
+                weapon.style.display = 'block';
+            }
+        });
+    }
+
+    hideUnselected();
+
+    champSelect.addEventListener('change', function() {
+        currentChamp = this.value;
+        hideUnselected();
+    });
+
+    weaponSelect.addEventListener('change', function() {
+        currentWeapon = this.value;
+        hideUnselected();
+    });
+
+
+
+
     document.getElementById("modifyTeamForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Empêche l'envoi du formulaire par défaut
 
@@ -38,7 +121,7 @@
             .then(response => {
                 if (response.status === 200) {
                     // La requête PATCH a réussi
-                    window.location.href = "/modifyTeam"; // Redirigez l'utilisateur vers la page de succès
+                    window.location.href = "/teamTemplate"; // Redirigez l'utilisateur vers la page de succès
                 } else {
                     console.error("Erreur lors de la requête PATCH");
                     // Gérer l'erreur ici
@@ -49,6 +132,7 @@
                 // Gérer l'erreur ici
             });
     });
+
 </script>
 
 
