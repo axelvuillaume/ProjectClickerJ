@@ -16,7 +16,7 @@ Utilisez le menu pour naviguer entre le "Weapon's Shop" (boutique d'armes), le "
 ## Fonctionnalités
 
 - Gagnez de l'argent et de l'expérience en cliquant sur l'écran.
-- Mises à jour en temps réel du score.
+- Mises à jour en temps réel des golds et de l'expérience.
 - Pas de limite de temps, jouez autant que vous le souhaitez.
 - Personnalisez, créez et ajoutez des équipes à volonté pour optimiser votre stratégie.
 
