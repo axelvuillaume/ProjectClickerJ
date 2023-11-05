@@ -31,7 +31,7 @@ public class WeaponController {
     @GetMapping("/shopWeapon")
     public String listWeapons(Model model, HttpSession session) {
         if (Utils.IsNotLogin(session,  playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
         List<Weapon> weaponsNotOwned = weaponRepo.findAll();
 
@@ -93,7 +93,7 @@ public class WeaponController {
     @GetMapping("/shopWeapon/research")
     public String researchWeapons(Model model, HttpSession session, @RequestParam("research") String research) {
         if (Utils.IsNotLogin(session,  playerRepo)) {
-            return "connexion";
+            return "redirect:/connexion";
         }
 
         Long currentPlayerId = (Long) session.getAttribute("player");
