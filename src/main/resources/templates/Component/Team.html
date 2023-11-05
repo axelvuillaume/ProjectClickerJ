@@ -7,7 +7,6 @@
         <div class="container">
             <div class="box">
                 <img th:src="@{${team.champion.Image}}" alt="Rakan">
-                
             </div>
 
             <div class="box">
@@ -23,7 +22,7 @@
         <div class="buttons">
             <button th:onclick="|select(event, '${team.id}')|"><a href="#">Select</a></button>
             <button th:onclick="|deleteTeam(event, '${team.id}')|"><a href="#" >Delete</a></button>
-            <button><a href="modifyTeam">Modify</a></button>
+            <a href="modifyTeam"><button>Modify</button></a>
         </div>
     </div>
 
