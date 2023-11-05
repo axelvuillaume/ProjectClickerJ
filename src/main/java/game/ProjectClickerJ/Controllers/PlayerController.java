@@ -76,6 +76,7 @@ public class PlayerController {
             teamRepo.save(defaultTeam);
 
             player.setInventoryTeams(defaultTeam);
+            player.setSelectedTeam(defaultTeam);
             playerRepo.save(player);
         }
         session.setAttribute("player", player.getId());
