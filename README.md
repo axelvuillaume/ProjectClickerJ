@@ -1,7 +1,5 @@
 # PROJECTCLICKERJ - Jeu de Clicker
 
-![Capture d'écran du Jeu de Clicker](screenshot.png)
-
 Bienvenue dans PROJECTCLICKERJ, un jeu de clicker amusant qui vous permet de gagner de l'argent et de l'expérience en cliquant sur l'écran. Plus vous cliquez, plus vous progressez dans le jeu. Voici comment ça fonctionne.
 
 ## Comment Jouer
