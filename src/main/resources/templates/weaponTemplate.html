@@ -20,7 +20,7 @@
         <div th:replace="Component/TopUserInfo :: topUserInfo(${player.getPseudo()}, ${player.getProfileImage()},${player.getGold()}, ${player.getXp()})"></div>
 
         <form action="/shopWeapon/research" method="get" class="research">
-            <input type="text" name="research" placeholder="Rechercher une arme">
+            <input type="text" name="research" placeholder="Search a weapon">
             <button type="submit"><img th:src="@{/icon/iconSearch.png}"/> </button>
         </form>
 
