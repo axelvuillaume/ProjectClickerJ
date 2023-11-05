@@ -229,7 +229,7 @@ public class TeamController {
             System.out.println("player not found");
             throw new RuntimeException("player not found");
         }
-
+        Player playerInstance = player.get();
         List<Team> teamsOwned = player.get().getInventoryTeams();
         model.addAttribute("teamsOwned", teamsOwned);
 
@@ -240,36 +240,36 @@ public class TeamController {
 
         model.addAttribute("championsOwned", championsOwned);
         model.addAttribute("weaponsOwned", weaponsOwned);
+        model.addAttribute("player", playerInstance);
 
         
         return "modifyTeam";
     }
 
     @PatchMapping("modifyTeam")
-    public String modifyTeam(Long championId, Long weaponId, Long teamId, HttpSession session, String teamName) {
+    public ResponseEntity<Map<String, String>>  modifyTeam(Long championId, Long weaponId, Long teamId, HttpSession session, String name) {
 
         teamModifyExist = false;
-
-        if (Utils.IsNotLogin(session, playerRepo)) {
-            return "connexion";
-        }
 
         Optional<Weapon> weapon = weaponRepo.findById(weaponId);
         if (weapon.isEmpty()) {
             System.out.println("weapon not found");
-            throw new RuntimeException("weapon not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "weapon not found"), HttpStatus.BAD_REQUEST);
+
         }
 
         Optional<Champion> champion = championRepo.findById(championId);
         if (champion.isEmpty()) {
             System.out.println("champion not found");
-            throw new RuntimeException("champion not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "champion not found"), HttpStatus.BAD_REQUEST);
+
         }
 
         Optional<Team> team = teamRepo.findById(teamId);
         if (team.isEmpty()) {
             System.out.println("team not found");
-            throw new RuntimeException("team not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "team not found"), HttpStatus.BAD_REQUEST);
+
         }
 
 
@@ -278,7 +278,8 @@ public class TeamController {
 
         if (player.isEmpty()) {
             System.out.println("player not found");
-            throw new RuntimeException("player not found");
+            return new ResponseEntity<>(Map.of("status", "error", "message", "player not found"), HttpStatus.BAD_REQUEST);
+
         } else {
 
             Player playerInstance = player.get();
@@ -286,12 +287,13 @@ public class TeamController {
 
             List<Team> playerTeams = playerInstance.getInventoryTeams();
             for (Team teamM : playerTeams) {
-                if ((teamM.getWeapon().getId().equals(weaponId) && teamM.getChampion().getId().equals(championId) )|| teamM.getName().equals(teamName)) {
+                if ((teamM.getWeapon().getId().equals(weaponId) && teamM.getChampion().getId().equals(championId) )|| teamM.getName().equals(name)) {
                     teamModifyExist = true;
                 }
             }
 
             if (!teamModifyExist) {
+                team.get().setName(name);
                 team.get().setChampion(champion.get());
                 team.get().setWeapon(weapon.get());
                 teamRepo.save(team.get());
@@ -300,7 +302,7 @@ public class TeamController {
             }
         }
 
-        return "redirect:/teamTemplate";
+        return new ResponseEntity<>(Map.of("status", "success", "message", "Chamgement successfully"), HttpStatus.OK);
     }
 
     @GetMapping("deleteTeam")
