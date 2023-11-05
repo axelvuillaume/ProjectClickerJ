@@ -23,7 +23,6 @@
         <div class="buttons">
             <button th:onclick="|select(event, '${team.id}')|"><a href="#">Select</a></button>
             <button th:if="${player.selectedTeam} != ${team}" th:onclick="|deleteTeam(event, '${team.id}')|"><a href="#" >Delete</a></button>
-            <a href="modifyTeam"><button>Modify</button></a>
         </div>
     </div>
 

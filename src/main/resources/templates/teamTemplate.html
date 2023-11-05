@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="main-body-template">
-    <video autoplay loop muted playsinline poster=""  id="back-video">
+    <video autoplay loop muted playsinline poster="" id="back-video">
         <source th:src="@{/AhriWallpaper.mp4}" type="video/mp4">
     </video>
     <div class="right-section">
@@ -20,7 +20,9 @@
 
 
         <div class="addTeam">
-        <a href="/addTeam"><img th:src="@{/icon/TeamIconAdd.png}" alt="weaponShop"></a>
+            <a href="/addTeam"><img th:src="@{/icon/TeamIconAdd.png}" alt="weaponShop"></a>
+            <span class="spacer"></span>
+            <a href="/modifyTeam"><img th:src="@{/icon/ManagerTeam.png}" alt="weaponShop"></a>
         </div>
 
         <div class="content-wrapper" id="player-wrapper">
@@ -31,7 +33,7 @@
 
     </div>
 
-<div th:replace="Component/SideBar :: sideBar"></div>
+    <div th:replace="Component/SideBar :: sideBar"></div>
     <script>
         function select(e, id) {
             e.preventDefault();
