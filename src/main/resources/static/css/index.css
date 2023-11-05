@@ -161,7 +161,6 @@ video {
     border-radius: 15px;
     margin-left: 75%;
     margin-top: 4%;
-    height: 70px;
     width: 300px;
     display: flex;
     justify-content: space-between;
@@ -281,8 +280,8 @@ video {
 
 .addTeam{
     position: absolute;
-    width: 7%;
-    margin: 2%;
+    width: 5%;
+    margin: 3%;
     z-index: 8;
 
 }
