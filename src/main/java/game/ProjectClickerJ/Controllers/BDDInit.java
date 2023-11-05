@@ -39,7 +39,7 @@ public class BDDInit {
         Champion c = new Champion();
         c.setName(name);
         c.setDescription(description);
-        c.setImage("champions/" + image + ".webp");
+        c.setImage("/champions/" + image + ".webp");
         c.setBonus(bonus);
         c.setPrix(prix);
         c.setXpUnlockable(xp);
