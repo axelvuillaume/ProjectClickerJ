@@ -1,5 +1,4 @@
 #top-user-info {
-    flex-grow: 0.1;
     background-image: linear-gradient(to right, #687460, #0E1313 40%);
     opacity: 0.6;
     border-radius: 15px;
@@ -10,20 +9,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
 }
 
 #inside-user-info {
     text-align: right;
     flex: 1;
+    padding: 0 10px;
 }
 
 .text-in-user {
     display: block;
+    margin: 0;
+    padding: 0;
 }
 
 #psudo-name {
     color: aliceblue;
     font-size: 30px;
+    white-space: nowrap;
 }
 
 #gold {
@@ -43,5 +47,4 @@
 #progressBar {
     width: 90%;
     margin-bottom: -1%;
-
 }
