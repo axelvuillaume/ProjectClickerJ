@@ -293,7 +293,11 @@ public class TeamController {
             }
 
             if (!teamModifyExist) {
-                team.get().setName(name);
+
+                if (!name.isEmpty()) {
+                    team.get().setName(name);
+                }
+
                 team.get().setChampion(champion.get());
                 team.get().setWeapon(weapon.get());
                 teamRepo.save(team.get());
