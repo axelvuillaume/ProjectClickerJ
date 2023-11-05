@@ -20,9 +20,11 @@ Utilisez le menu pour naviguer entre le "Shop Weapon" (boutique d'armes), le "Sh
 - Pas de limite de temps, jouez autant que vous le souhaitez.
 - Personnalisez, créez et ajoutez des équipes à volonté pour optimiser votre stratégie.
 
-## Contributions
+## Auteurs
+- @liro-u Valentin Noailles
+- @DamienLEE0211 Dongwon Lee
+- @axelvuillaume Axel Vuillaume
 
-Si vous souhaitez contribuer à ce jeu ou signaler des problèmes, n'hésitez pas à créer une issue ou à soumettre une demande de tirage.
 
 ## Licence
 
