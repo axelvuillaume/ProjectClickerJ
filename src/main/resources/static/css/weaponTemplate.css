@@ -52,7 +52,8 @@ video{
     justify-content: space-between;
     padding: 20px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-    height: calc(100vh - 50vh); /* make each grid item the height of the viewport minus padding */
+
+    height: auto;
     scroll-snap-align: start;
 }
 
