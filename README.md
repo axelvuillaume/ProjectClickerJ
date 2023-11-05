@@ -28,5 +28,5 @@ Utilisez le menu pour naviguer entre le "Shop Weapon" (boutique d'armes), le "Sh
 
 ## Licence
 
-Ce jeu est sous licence MIT. Vous êtes libre de l'utiliser, de le modifier et de le distribuer comme bon vous semble. Veuillez consulter le fichier [LICENSE](LICENSE) pour plus de détails.
+Ce projet est destiné à un usage strictement éducatif dans le cadre du cours de JEE à cy-tech. Tous les droits sont réservés par les auteurs du projet, et aucune distribution en dehors de cet environnement n'est autorisée.
 
