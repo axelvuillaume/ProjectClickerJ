@@ -61,8 +61,8 @@ public class PlayerController {
         Player player = playerRepo.findByPseudo(pseudo);
 
         if (player == null) {
-            Weapon weaponDefault = weaponRepo.findByName("DefaultWeapon");
-            Champion championDefault = championRepo.findByName("DefaultChampion");
+            Weapon weaponDefault = weaponRepo.findByName("Epée Wotan");
+            Champion championDefault = championRepo.findByName("Bronya");
 
             player = new Player();
             player.setProfileImage("deaultPp.png");
