@@ -40,7 +40,7 @@
                             </option>
                         </select>
                         <div class="game-item champ" th:each="Champ : ${championsOwned}" th:attr="data-id=${Champ.id}">
-                            <div class="game-image"  th:replace="Component/championCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.prix}, ${Champ.xpUnlockable}, ${Champ.bonus}, ${Champ.id}, true, false)"></div>
+                            <div class="game-image"  th:replace="Component/ChampionCard :: championCard(${Champ.image}, ${Champ.name}, ${Champ.description}, ${Champ.prix}, ${Champ.xpUnlockable}, ${Champ.bonus}, ${Champ.id}, true, false)"></div>
                         </div>
                     </div>
                     <div class="cardSelector">
@@ -50,7 +50,7 @@
                             </option>
                         </select>
                         <div class="game-item weapon" th:each="Weap : ${weaponsOwned}" th:attr="data-id=${Weap.id}">
-                            <div class="game-image"  th:replace="Component/weaponCard :: weaponCard(${Weap.image}, ${Weap.name}, ${Weap.description}, ${Weap.prix}, ${Weap.xpUnlockable}, ${Weap.bonus}, ${Weap.id}, true, false)"></div>
+                            <div class="game-image"  th:replace="Component/WeaponCard :: weaponCard(${Weap.image}, ${Weap.name}, ${Weap.description}, ${Weap.prix}, ${Weap.xpUnlockable}, ${Weap.bonus}, ${Weap.id}, true, false)"></div>
                         </div>
                     </div>
                 </div>

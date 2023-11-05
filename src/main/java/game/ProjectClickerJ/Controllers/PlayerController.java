@@ -65,7 +65,7 @@ public class PlayerController {
             Champion championDefault = championRepo.findByName("Bronya");
 
             player = new Player();
-            player.setProfileImage("deaultPp.png");
+            player.setProfileImage("/deaultPp.png");
             player.setPseudo(pseudo);
             player.setXp(0);
             player.setGold(0);
@@ -76,6 +76,7 @@ public class PlayerController {
             teamRepo.save(defaultTeam);
 
             player.setInventoryTeams(defaultTeam);
+            player.setSelectedTeam(defaultTeam);
             playerRepo.save(player);
         }
         session.setAttribute("player", player.getId());

@@ -7,23 +7,22 @@
         <div class="container">
             <div class="box">
                 <img th:src="@{${team.champion.Image}}" alt="">
-                <p th:text="${team.champion.name}" style="color:#D7B573"> </p>
+                <p th:text="${team.champion.name}" style="color:white"> </p>
             </div>
 
             <div class="box">
                 <img th:src="@{${team.weapon.Image}}" alt="">
-                <p th:text="${team.weapon.name}" style="color:#D7B573"> </p>
+                <p th:text="${team.weapon.name}" style="color:white"> </p>
 
             </div>
             <div class="bonus-container">
-                <p class="bonus" th:text="'Bonus: ' + ${team.champion.bonus + team.weapon.bonus}"></p>
-                <p class="nom" th:text="'Name: ' + ${team.name}"></p>
+                <p class="bonus" th:text="'Bonus: ' + ${team.champion.bonus + team.weapon.bonus}" style="color:white"></p>
+                <p class="nom" th:text="'Name: ' + ${team.name}" style="color:white"></p>
             </div>
         </div>
         <div class="buttons">
             <button th:onclick="|select(event, '${team.id}')|"><a href="#">Select</a></button>
             <button th:onclick="|deleteTeam(event, '${team.id}')|"><a href="#" >Delete</a></button>
-            <a href="modifyTeam"><button>Modify</button></a>
         </div>
     </div>
 
