@@ -27,7 +27,7 @@ public class BDDInit {
         Weapon w = new Weapon();
         w.setName(name);
         w.setDescription(description);
-        w.setImage("weapon/" + image + ".webp");
+        w.setImage("/weapon/" + image + ".webp");
         w.setBonus(bonus);
         w.setPrix(prix);
         w.setXpUnlockable(xp);
