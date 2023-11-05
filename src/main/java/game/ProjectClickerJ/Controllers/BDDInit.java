@@ -59,7 +59,7 @@ public class BDDInit {
                 "Epée Wotan",
                 "une épée distribuée aux élèves de la S-Class Shcool",
                 "wotan",
-                0,
+                1,
                 0,
                 0
         );
