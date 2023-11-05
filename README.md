@@ -4,7 +4,7 @@ Bienvenue dans PROJECTCLICKERJ, un jeu de clicker amusant qui vous permet de gag
 
 ## Comment Jouer
 
-Pour commencer à jouer, suivez ce lien : Lien vers le jeu
+Pour commencer à jouer, suivez ce lien : [Lien vers le jeu](https://projectclickerj.onrender.com/)
 
 Au début de l'aventure, vous disposez d'armes de base qui rapportent peu d'argent par clic, mais c'est un bon début. Avec l'argent gagné, vous pouvez débloquer de nouveaux champions, armes de plus en plus puissantes et créer des équipes pour maximiser vos gains.
 
