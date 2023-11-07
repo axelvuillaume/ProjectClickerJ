@@ -27,6 +27,8 @@ Utilisez le menu pour naviguer entre le "Weapon's Shop" (boutique d'armes), le "
 
 ### Conseil
 
+L'utilisation du site en ligne nécessite une très bonne connexion dû au serveur gratuit sous peine d'être dérangé par des bugs, notamment l'initialisation du premier joueur.
+
 Activez l'accélération matérielle de votre navigateur pour une meilleure fluidité !
 
 De plus, nous utilisons un server render gratuit, donc votre progression est perdue lorsque le serveur se met en veille (au bout d'une trentaine de minutes environ), ne vous arrêtez jamais de cliquer !
