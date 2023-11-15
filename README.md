@@ -27,7 +27,7 @@ Utilisez le menu pour naviguer entre le "Weapon's Shop" (boutique d'armes), le "
 
 ### Conseil
 
-L'utilisation du site en ligne nécessite une très bonne connexion dû au serveur gratuit sous peine d'être dérangé par des bugs et demande d'attendre lors de l'ouverture du site pour le démarrage du serveur , notamment l'initialisation du premier joueur. Le site est aussi jouable en local évidemment ce qui peut améliorer l'expérience de jeu.
+L'utilisation du site en ligne nécessite une très bonne connexion dû au serveur gratuit sous peine d'être dérangé par des bugs, notamment l'initialisation du premier joueur. Il est nécessaire d'attendre lors de l'ouverture du site pour le démarrage du serveur. Le site est aussi jouable en local évidemment ce qui peut améliorer l'expérience de jeu.
 
 Activez l'accélération matérielle de votre navigateur pour une meilleure fluidité !
 
